@@ -37,6 +37,13 @@ st.markdown("""
 }
 .exercise-card:hover { transform: translateY(-2px); }
 
+.exercise-icon {
+    width: 100%; height: 80px; border-radius: 12px;
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2.5rem;
+}
+
 .video-thumb {
     width: 100%; border-radius: 12px; cursor: pointer;
     transition: transform 0.2s;
@@ -71,13 +78,19 @@ st.markdown("""
 .macro-prot { background: #dbeafe; color: #2563eb; }
 
 .day-card {
-    padding: 1rem; border-radius: 12px; text-align: center;
-    margin: 0.3rem; min-height: 90px; transition: all 0.2s;
+    padding: 0.8rem; border-radius: 12px; text-align: center;
+    margin: 0.2rem; min-height: 80px; transition: all 0.2s;
+    cursor: pointer;
 }
 .day-today {
     background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-    color: white; transform: scale(1.05);
-    box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4);
+    color: white; transform: scale(1.02);
+    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
+}
+.day-selected {
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+    color: white; transform: scale(1.02);
+    box-shadow: 0 8px 20px rgba(34, 197, 94, 0.4);
 }
 .day-normal { background: #f8fafc; color: #334155; border: 1px solid #e2e8f0; }
 .day-abdos { border: 2px solid #f97316; }
@@ -86,6 +99,21 @@ st.markdown("""
     background: linear-gradient(135deg, #f97316 0%, #ef4444 100%);
     color: white; padding: 1.2rem; border-radius: 16px;
     margin: 1.5rem 0; text-align: center;
+}
+
+.meal-plan-card {
+    background: white; border-radius: 16px; padding: 1.2rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08); margin: 0.5rem 0;
+    border-left: 4px solid #6366f1;
+}
+
+.portion-luca {
+    background: #dbeafe; color: #1e40af; padding: 0.3rem 0.6rem;
+    border-radius: 8px; font-size: 0.8rem; font-weight: 600;
+}
+.portion-sonia {
+    background: #fce7f3; color: #be185d; padding: 0.3rem 0.6rem;
+    border-radius: 8px; font-size: 0.8rem; font-weight: 600;
 }
 
 #MainMenu {visibility: hidden;}
@@ -112,38 +140,43 @@ if 'weight_sonia' not in st.session_state:
 
 # ==================== EXERCICES ====================
 EXERCICES = {
-    "Pompes classiques": {"video": "IODxDxX7oi4", "muscle": "Pectoraux", "desc": "Le basique pour des pecs en béton"},
-    "Pompes inclinées": {"video": "4dF1DOWzf20", "muscle": "Haut des pecs", "desc": "Cible le haut de la poitrine"},
-    "Pompes serrées": {"video": "J0DnG1_S92I", "muscle": "Triceps", "desc": "Focus triceps"},
-    "Pike push-ups": {"video": "sposDXWEB0A", "muscle": "Épaules", "desc": "Excellent pour les épaules"},
-    "Dips sur chaise": {"video": "0326dy_-CzM", "muscle": "Triceps", "desc": "Triceps avec une chaise"},
-    "Développé haltères": {"video": "qEwKCR5JCog", "muscle": "Épaules", "desc": "Masse pour les épaules"},
-    "Élévations latérales": {"video": "3VcKaXpzqRo", "muscle": "Épaules", "desc": "Épaules larges"},
-    "Extension triceps": {"video": "_gsUck-7M74", "muscle": "Triceps", "desc": "Isolation triceps"},
-    "Rowing haltère": {"video": "roCP6wCXPqo", "muscle": "Dos", "desc": "Dos épais"},
-    "Superman": {"video": "z6PJMT2y8GQ", "muscle": "Lombaires", "desc": "Renforce le bas du dos"},
-    "Oiseau": {"video": "EA7u4Q_8HQ0", "muscle": "Arrière épaule", "desc": "Arrière d'épaule"},
-    "Curl biceps": {"video": "ykJmrZ5v0Oo", "muscle": "Biceps", "desc": "Gros biceps"},
-    "Curl marteau": {"video": "zC3nLlEvin4", "muscle": "Biceps", "desc": "Biceps + avant-bras"},
-    "Squats": {"video": "ultWZbUMPL8", "muscle": "Quadriceps", "desc": "Le roi des jambes"},
-    "Squats sumo": {"video": "9ZuXKqRbT9k", "muscle": "Adducteurs", "desc": "Intérieur cuisses"},
-    "Fentes": {"video": "QOVaHwm-Q6U", "muscle": "Quadriceps/Fessiers", "desc": "Jambes sculptées"},
-    "Hip thrust": {"video": "SEdqd1n0cvg", "muscle": "Fessiers", "desc": "Meilleur exo fessiers"},
-    "Glute bridge": {"video": "OUgsJ8-Vi0E", "muscle": "Fessiers", "desc": "Activation fessiers"},
-    "Donkey kicks": {"video": "SJ1Xuz9D-ZQ", "muscle": "Fessiers", "desc": "Galbe fessiers"},
-    "Fire hydrants": {"video": "La3xrTxLXSE", "muscle": "Fessiers", "desc": "Fessiers latéraux"},
-    "Jumping jacks": {"video": "c4DAnQ6DtF8", "muscle": "Cardio", "desc": "Cardio"},
-    "Burpees": {"video": "TU8QYVW0gDU", "muscle": "Full body", "desc": "Brûleur de calories"},
-    "High knees": {"video": "D0bLJnSBNI8", "muscle": "Cardio", "desc": "Cardio intense"},
-    "Squat jumps": {"video": "A-cFYWvaHr0", "muscle": "Jambes/Cardio", "desc": "Explosivité"},
-    "Mountain climbers": {"video": "nmwgirgXLYM", "muscle": "Core/Cardio", "desc": "Abdos + cardio"},
-    "Gainage (Planche)": {"video": "ASdvN_XEl_c", "muscle": "Core", "desc": "Core solide"},
-    "Gainage latéral": {"video": "K2VljzCC16g", "muscle": "Obliques", "desc": "Obliques"},
-    "Crunch": {"video": "Xyd_fa5zoEU", "muscle": "Abdos", "desc": "Le classique"},
-    "Russian twist": {"video": "wkD8rjkodUI", "muscle": "Obliques", "desc": "Taille fine"},
-    "Scissor kicks": {"video": "WoNCIBVLbgY", "muscle": "Bas abdos", "desc": "Bas du ventre"},
-    "V-ups": {"video": "iP2fjvG0g3w", "muscle": "Abdos", "desc": "Abdos intense"},
-    "Bicycle crunch": {"video": "9FGilxCbdz8", "muscle": "Obliques", "desc": "Abdos + obliques"},
+    "Pompes classiques": {"video": "IODxDxX7oi4", "muscle": "Pectoraux", "desc": "Le basique pour des pecs en béton", "icon": "💪"},
+    "Pompes inclinées": {"video": "4dF1DOWzf20", "muscle": "Haut des pecs", "desc": "Cible le haut de la poitrine", "icon": "💪"},
+    "Pompes serrées": {"video": "J0DnG1_S92I", "muscle": "Triceps", "desc": "Focus triceps", "icon": "💪"},
+    "Pike push-ups": {"video": "sposDXWEB0A", "muscle": "Épaules", "desc": "Excellent pour les épaules", "icon": "🏋️"},
+    "Dips sur chaise": {"video": "0326dy_-CzM", "muscle": "Triceps", "desc": "Triceps avec une chaise", "icon": "🪑"},
+    "Développé haltères": {"video": "qEwKCR5JCog", "muscle": "Épaules", "desc": "Masse pour les épaules", "icon": "🏋️"},
+    "Élévations latérales": {"video": "3VcKaXpzqRo", "muscle": "Épaules", "desc": "Épaules larges", "icon": "🏋️"},
+    "Extension triceps": {"video": "_gsUck-7M74", "muscle": "Triceps", "desc": "Isolation triceps", "icon": "💪"},
+    "Rowing haltère": {"video": "roCP6wCXPqo", "muscle": "Dos", "desc": "Dos épais", "icon": "🔙"},
+    "Superman": {"video": "z6PJMT2y8GQ", "muscle": "Lombaires", "desc": "Renforce le bas du dos", "icon": "🦸"},
+    "Oiseau": {"video": "EA7u4Q_8HQ0", "muscle": "Arrière épaule", "desc": "Arrière d'épaule", "icon": "🐦"},
+    "Curl biceps": {"video": "ykJmrZ5v0Oo", "muscle": "Biceps", "desc": "Gros biceps", "icon": "💪"},
+    "Curl marteau": {"video": "zC3nLlEvin4", "muscle": "Biceps", "desc": "Biceps + avant-bras", "icon": "🔨"},
+    "Squats": {"video": "ultWZbUMPL8", "muscle": "Quadriceps", "desc": "Le roi des jambes", "icon": "🦵"},
+    "Squats sumo": {"video": "9ZuXKqRbT9k", "muscle": "Adducteurs", "desc": "Intérieur cuisses", "icon": "🦵"},
+    "Fentes": {"video": "QOVaHwm-Q6U", "muscle": "Quadriceps/Fessiers", "desc": "Jambes sculptées", "icon": "🦵"},
+    "Hip thrust": {"video": "SEdqd1n0cvg", "muscle": "Fessiers", "desc": "Meilleur exo fessiers", "icon": "🍑"},
+    "Glute bridge": {"video": "OUgsJ8-Vi0E", "muscle": "Fessiers", "desc": "Activation fessiers", "icon": "🍑"},
+    "Donkey kicks": {"video": "SJ1Xuz9D-ZQ", "muscle": "Fessiers", "desc": "Galbe fessiers", "icon": "🍑"},
+    "Fire hydrants": {"video": "La3xrTxLXSE", "muscle": "Fessiers", "desc": "Fessiers latéraux", "icon": "🔥"},
+    "Jumping jacks": {"video": "c4DAnQ6DtF8", "muscle": "Cardio", "desc": "Cardio", "icon": "⭐"},
+    "Burpees": {"video": "TU8QYVW0gDU", "muscle": "Full body", "desc": "Brûleur de calories", "icon": "🔥"},
+    "High knees": {"video": "D0bLJnSBNI8", "muscle": "Cardio", "desc": "Cardio intense", "icon": "🏃"},
+    "Squat jumps": {"video": "A-cFYWvaHr0", "muscle": "Jambes/Cardio", "desc": "Explosivité", "icon": "🦘"},
+    "Mountain climbers": {"video": "nmwgirgXLYM", "muscle": "Core/Cardio", "desc": "Abdos + cardio", "icon": "⛰️"},
+    "Gainage (Planche)": {"video": "ASdvN_XEl_c", "muscle": "Core", "desc": "Core solide", "icon": "🧘"},
+    "Gainage latéral": {"video": "K2VljzCC16g", "muscle": "Obliques", "desc": "Obliques", "icon": "🧘"},
+    "Crunch": {"video": "Xyd_fa5zoEU", "muscle": "Abdos", "desc": "Le classique", "icon": "🔥"},
+    "Russian twist": {"video": "wkD8rjkodUI", "muscle": "Obliques", "desc": "Taille fine", "icon": "🌀"},
+    "Scissor kicks": {"video": "WoNCIBVLbgY", "muscle": "Bas abdos", "desc": "Bas du ventre", "icon": "✂️"},
+    "V-ups": {"video": "iP2fjvG0g3w", "muscle": "Abdos", "desc": "Abdos intense", "icon": "🔥"},
+    "Bicycle crunch": {"video": "9FGilxCbdz8", "muscle": "Obliques", "desc": "Abdos + obliques", "icon": "🚴"},
+    # Exercices sans vidéo (repos/cardio simple)
+    "Marche/Vélo léger": {"video": "", "muscle": "Cardio léger", "desc": "Récupération active", "icon": "🚶"},
+    "Marche rapide/Vélo": {"video": "", "muscle": "Cardio", "desc": "Cardio modéré", "icon": "🚴"},
+    "Vélo ou Course": {"video": "", "muscle": "Cardio", "desc": "Endurance", "icon": "🏃"},
+    "Étirements": {"video": "", "muscle": "Flexibilité", "desc": "Récupération", "icon": "🧘"},
 }
 
 # ==================== RECETTES HEALTHY & GOURMANDES ====================
@@ -156,7 +189,8 @@ RECETTES = {
             "kcal": 350, "prot": 25,
             "ingredients": ["1 banane mûre", "2 oeufs", "30g flocons d'avoine", "30g whey vanille", "1 c.c levure"],
             "prep": "Mixer tout. Cuire à la poêle comme des pancakes. Servir avec fruits frais.",
-            "why": "Délicieux, rassasiant et plein de protéines !"
+            "why": "Délicieux, rassasiant et plein de protéines !",
+            "portions": {"luca": "3 pancakes + 40g whey", "sonia": "2 pancakes + 20g whey"}
         },
         {
             "nom": "🥑 Toast Avocat Oeuf Poché",
@@ -165,7 +199,8 @@ RECETTES = {
             "kcal": 380, "prot": 18,
             "ingredients": ["1 tranche pain complet", "1/2 avocat", "1 oeuf", "Citron", "Piment (option)"],
             "prep": "Toaster le pain. Écraser l'avocat avec citron. Pocher l'oeuf. Assembler.",
-            "why": "Bon gras + protéines = énergie longue durée"
+            "why": "Bon gras + protéines = énergie longue durée",
+            "portions": {"luca": "2 toasts + 2 oeufs", "sonia": "1 toast + 1 oeuf"}
         },
         {
             "nom": "🫐 Overnight Oats Fruits Rouges",
@@ -174,7 +209,8 @@ RECETTES = {
             "kcal": 320, "prot": 22,
             "ingredients": ["50g flocons d'avoine", "150ml lait", "100g yaourt grec", "Fruits rouges", "Miel"],
             "prep": "Mélanger avoine, lait, yaourt. Réfrigérer une nuit. Ajouter fruits et miel.",
-            "why": "Zéro effort le matin, super healthy"
+            "why": "Zéro effort le matin, super healthy",
+            "portions": {"luca": "70g avoine + 200g yaourt", "sonia": "40g avoine + 100g yaourt"}
         },
     ],
     "dejeuner": [
@@ -185,7 +221,8 @@ RECETTES = {
             "kcal": 480, "prot": 42,
             "ingredients": ["150g poulet", "100g quinoa", "Avocat", "Pois chiches", "Légumes", "Sauce tahini"],
             "prep": "Cuire quinoa et poulet. Disposer tous les ingrédients en bowl. Sauce tahini.",
-            "why": "Complet, coloré, délicieux et ultra rassasiant"
+            "why": "Complet, coloré, délicieux et ultra rassasiant",
+            "portions": {"luca": "200g poulet + 150g quinoa", "sonia": "120g poulet + 80g quinoa"}
         },
         {
             "nom": "🌮 Wrap Poulet Caesar Light",
@@ -194,7 +231,8 @@ RECETTES = {
             "kcal": 420, "prot": 38,
             "ingredients": ["1 tortilla complète", "150g poulet", "Salade romaine", "Parmesan", "Sauce yaourt-citron"],
             "prep": "Griller le poulet. Préparer sauce yaourt+citron+ail. Garnir et rouler.",
-            "why": "Le goût d'un Caesar sans les calories"
+            "why": "Le goût d'un Caesar sans les calories",
+            "portions": {"luca": "2 wraps", "sonia": "1 wrap"}
         },
         {
             "nom": "🍝 Poke Bowl Saumon",
@@ -203,7 +241,8 @@ RECETTES = {
             "kcal": 450, "prot": 35,
             "ingredients": ["150g saumon frais", "100g riz", "Avocat", "Edamame", "Mangue", "Sauce soja"],
             "prep": "Cuire le riz. Couper saumon en cubes. Assembler avec tous les toppings.",
-            "why": "Oméga-3 + fraîcheur = combo gagnant"
+            "why": "Oméga-3 + fraîcheur = combo gagnant",
+            "portions": {"luca": "180g saumon + 150g riz", "sonia": "120g saumon + 80g riz"}
         },
     ],
     "diner": [
@@ -214,7 +253,8 @@ RECETTES = {
             "kcal": 380, "prot": 40,
             "ingredients": ["200g poulet", "Lait de coco light", "Curry", "Poivrons", "Oignon", "Riz basmati"],
             "prep": "Faire revenir poulet et légumes. Ajouter curry et lait coco. Mijoter. Servir avec riz.",
-            "why": "Saveurs intenses, peu de calories"
+            "why": "Saveurs intenses, peu de calories",
+            "portions": {"luca": "250g poulet + 120g riz", "sonia": "150g poulet + 60g riz"}
         },
         {
             "nom": "🐟 Papillote Saumon Citron",
@@ -223,7 +263,8 @@ RECETTES = {
             "kcal": 350, "prot": 38,
             "ingredients": ["180g saumon", "Citron", "Aneth", "Courgettes", "Tomates cerises"],
             "prep": "Mettre saumon et légumes en papillote. Citron et aneth. Four 20min à 180°C.",
-            "why": "Cuisson sans gras, maximum de goût"
+            "why": "Cuisson sans gras, maximum de goût",
+            "portions": {"luca": "220g saumon + légumes à volonté", "sonia": "150g saumon + légumes à volonté"}
         },
         {
             "nom": "🍜 Wok Crevettes Légumes",
@@ -232,7 +273,8 @@ RECETTES = {
             "kcal": 320, "prot": 32,
             "ingredients": ["200g crevettes", "Brocoli", "Poivrons", "Champignons", "Sauce soja", "Gingembre"],
             "prep": "Sauter les crevettes. Ajouter légumes. Assaisonner sauce soja et gingembre.",
-            "why": "Rapide, léger et plein de saveurs asiatiques"
+            "why": "Rapide, léger et plein de saveurs asiatiques",
+            "portions": {"luca": "250g crevettes + nouilles", "sonia": "180g crevettes seules"}
         },
     ],
     "collation": [
@@ -243,7 +285,8 @@ RECETTES = {
             "kcal": 280, "prot": 30,
             "ingredients": ["30g whey chocolat", "250ml lait d'amande", "1 banane", "1 c.s beurre cacahuète"],
             "prep": "Mixer tous les ingrédients jusqu'à consistance lisse.",
-            "why": "Goût dessert, macros parfaites"
+            "why": "Goût dessert, macros parfaites",
+            "portions": {"luca": "40g whey + beurre cacahuète", "sonia": "20g whey sans beurre"}
         },
         {
             "nom": "🍫 Energy Balls Cacao",
@@ -252,7 +295,8 @@ RECETTES = {
             "kcal": 180, "prot": 8,
             "ingredients": ["100g dattes", "50g amandes", "2 c.s cacao", "1 c.s miel"],
             "prep": "Mixer dattes et amandes. Ajouter cacao et miel. Former des boules. Réfrigérer.",
-            "why": "Sucré naturellement, énergie immédiate"
+            "why": "Sucré naturellement, énergie immédiate",
+            "portions": {"luca": "4 balls", "sonia": "2 balls"}
         },
         {
             "nom": "🍌 Yaourt Grec Gourmand",
@@ -261,9 +305,21 @@ RECETTES = {
             "kcal": 200, "prot": 18,
             "ingredients": ["200g yaourt grec 0%", "Granola", "Miel", "Fruits frais"],
             "prep": "Mettre yaourt dans un bol. Ajouter granola, fruits et filet de miel.",
-            "why": "Protéiné, gourmand et rassasiant"
+            "why": "Protéiné, gourmand et rassasiant",
+            "portions": {"luca": "250g yaourt + 40g granola", "sonia": "150g yaourt + 20g granola"}
         },
     ]
+}
+
+# ==================== PLANNING REPAS SEMAINE ====================
+MEAL_PLAN = {
+    0: {"petit_dej": 0, "dejeuner": 0, "diner": 0, "collation": 0},  # Lundi
+    1: {"petit_dej": 1, "dejeuner": 1, "diner": 1, "collation": 1},  # Mardi
+    2: {"petit_dej": 2, "dejeuner": 2, "diner": 2, "collation": 2},  # Mercredi
+    3: {"petit_dej": 0, "dejeuner": 0, "diner": 1, "collation": 0},  # Jeudi
+    4: {"petit_dej": 1, "dejeuner": 1, "diner": 0, "collation": 1},  # Vendredi
+    5: {"petit_dej": 2, "dejeuner": 2, "diner": 2, "collation": 2},  # Samedi
+    6: {"petit_dej": 0, "dejeuner": 0, "diner": 1, "collation": 0},  # Dimanche
 }
 
 # ==================== PROGRAMMES ====================
@@ -371,42 +427,75 @@ CIRCUIT_ABDOS = [
 ]
 
 # ==================== FONCTIONS ====================
-def render_calendar(program):
+def render_calendar(program, user_key):
     today_idx = date.today().weekday()
-    cols = st.columns(7)
     
+    # Sélecteur de jour
+    selected_day = st.selectbox(
+        "📅 Choisir le jour",
+        options=list(range(7)),
+        format_func=lambda x: f"{'👉 ' if x == today_idx else ''}{JOURS[x]} - {program.get(x, {}).get('nom', 'Repos')}",
+        index=today_idx,
+        key=f"day_select_{user_key}"
+    )
+    
+    # Affichage du calendrier visuel
+    cols = st.columns(7)
     for i, jour in enumerate(JOURS):
         with cols[i]:
             p = program.get(i, {})
             is_today = (i == today_idx)
+            is_selected = (i == selected_day)
             has_abdos = p.get('abdos', False)
             
-            css = "day-today" if is_today else "day-normal"
-            if has_abdos and not is_today:
+            if is_selected and is_today:
+                css = "day-today"
+            elif is_selected:
+                css = "day-selected"
+            else:
+                css = "day-normal"
+            
+            if has_abdos and not is_selected:
                 css += " day-abdos"
             
             emoji = p.get('emoji', '')
-            marker = "👉 " if is_today else ""
+            marker = "✓" if is_selected else ""
             
             st.markdown(f"""
             <div class="day-card {css}">
-                <div style="font-size: 1.5rem;">{emoji}</div>
-                <b>{marker}{jour[:3]}</b><br>
-                <small>{p.get('nom', 'Repos')}</small><br>
-                <small>{p.get('duree', 0)} min</small>
+                <div style="font-size: 1.3rem;">{emoji}</div>
+                <b>{jour[:3]}</b><br>
+                <small>{p.get('nom', 'Repos')[:8]}</small>
+                <div style="font-size: 0.8rem;">{marker}</div>
             </div>
             """, unsafe_allow_html=True)
     
-    return today_idx
+    return selected_day
 
 def render_exercise_card(nom, sets):
-    ex = EXERCICES.get(nom, {})
+    ex = EXERCICES.get(nom, {"video": "", "muscle": "", "desc": "", "icon": "🏋️"})
     video_id = ex.get('video', '')
     muscle = ex.get('muscle', '')
     desc = ex.get('desc', '')
+    icon = ex.get('icon', '🏋️')
     
+    # Si pas de vidéo, afficher une carte avec icône
     if not video_id:
-        st.markdown(f"**{nom}** - {sets}")
+        st.markdown(f"""
+        <div class="exercise-card">
+            <div style="display: flex; gap: 1rem; align-items: center;">
+                <div style="flex: 0 0 80px;">
+                    <div class="exercise-icon">{icon}</div>
+                </div>
+                <div style="flex: 1;">
+                    <h4 style="margin: 0; color: #1e1e2e;">{nom}</h4>
+                    <p style="margin: 0.2rem 0; color: #6366f1; font-weight: 600;">{sets}</p>
+                    <p style="margin: 0; font-size: 0.8rem; color: #64748b;">{desc}</p>
+                    <span style="background: #f1f5f9; padding: 0.2rem 0.5rem; border-radius: 20px; font-size: 0.7rem;">{muscle}</span>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
         return
     
     thumb = f"https://img.youtube.com/vi/{video_id}/mqdefault.jpg"
@@ -458,13 +547,13 @@ def render_workout(program, day_idx, user_key):
     
     col1, col2 = st.columns([3, 1])
     with col1:
-        feeling = st.slider("Comment était ta séance ?", 1, 5, 3, key=f"feel_{user_key}")
+        feeling = st.slider("Comment était ta séance ?", 1, 5, 3, key=f"feel_{user_key}_{day_idx}")
     with col2:
-        if st.button("✅ Terminé !", key=f"btn_{user_key}", type="primary", use_container_width=True):
+        if st.button("✅ Terminé !", key=f"btn_{user_key}_{day_idx}", type="primary", use_container_width=True):
             st.balloons()
             st.success("🎉 Bravo !")
 
-def render_recipe_card(recipe):
+def render_recipe_card(recipe, show_portions=False):
     st.markdown(f"""
     <div class="recipe-card">
         <img src="{recipe['img']}" class="recipe-img" alt="{recipe['nom']}">
@@ -479,6 +568,14 @@ def render_recipe_card(recipe):
         </div>
     </div>
     """, unsafe_allow_html=True)
+    
+    if show_portions and 'portions' in recipe:
+        st.markdown(f"""
+        <div style="margin-top: 0.5rem;">
+            <span class="portion-luca">🏋️ Luca: {recipe['portions']['luca']}</span>
+            <span class="portion-sonia">🧘 Sonia: {recipe['portions']['sonia']}</span>
+        </div>
+        """, unsafe_allow_html=True)
     
     with st.expander("📝 Ingrédients & Préparation"):
         st.markdown("**Ingrédients:**")
@@ -508,7 +605,104 @@ def render_nutrition():
     cols = st.columns(3)
     for idx, recipe in enumerate(recipes):
         with cols[idx % 3]:
-            render_recipe_card(recipe)
+            render_recipe_card(recipe, show_portions=True)
+
+def render_meal_plan():
+    st.markdown("## 📅 Planning Repas de la Semaine")
+    st.markdown("*Mêmes plats, portions adaptées à chaque objectif*")
+    
+    # Sélecteur de jour pour le planning repas
+    selected_day = st.selectbox(
+        "📅 Voir le menu du jour",
+        options=list(range(7)),
+        format_func=lambda x: JOURS[x],
+        index=date.today().weekday(),
+        key="meal_day_select"
+    )
+    
+    plan = MEAL_PLAN.get(selected_day, {})
+    
+    st.markdown(f"### 📆 Menu du {JOURS[selected_day]}")
+    
+    # Petit-déjeuner
+    st.markdown("#### 🍳 Petit-déjeuner")
+    recipe = RECETTES["petit_dejeuner"][plan.get("petit_dej", 0)]
+    col1, col2 = st.columns([1, 2])
+    with col1:
+        st.image(recipe['img'], use_container_width=True)
+    with col2:
+        st.markdown(f"**{recipe['nom']}**")
+        st.markdown(f"""
+        <span class="portion-luca">🏋️ Luca: {recipe['portions']['luca']}</span><br>
+        <span class="portion-sonia">🧘 Sonia: {recipe['portions']['sonia']}</span>
+        """, unsafe_allow_html=True)
+    
+    st.markdown("---")
+    
+    # Déjeuner
+    st.markdown("#### 🍝 Déjeuner")
+    recipe = RECETTES["dejeuner"][plan.get("dejeuner", 0)]
+    col1, col2 = st.columns([1, 2])
+    with col1:
+        st.image(recipe['img'], use_container_width=True)
+    with col2:
+        st.markdown(f"**{recipe['nom']}**")
+        st.markdown(f"""
+        <span class="portion-luca">🏋️ Luca: {recipe['portions']['luca']}</span><br>
+        <span class="portion-sonia">🧘 Sonia: {recipe['portions']['sonia']}</span>
+        """, unsafe_allow_html=True)
+    
+    st.markdown("---")
+    
+    # Collation
+    st.markdown("#### 🍪 Collation")
+    recipe = RECETTES["collation"][plan.get("collation", 0)]
+    col1, col2 = st.columns([1, 2])
+    with col1:
+        st.image(recipe['img'], use_container_width=True)
+    with col2:
+        st.markdown(f"**{recipe['nom']}**")
+        st.markdown(f"""
+        <span class="portion-luca">🏋️ Luca: {recipe['portions']['luca']}</span><br>
+        <span class="portion-sonia">🧘 Sonia: {recipe['portions']['sonia']}</span>
+        """, unsafe_allow_html=True)
+    
+    st.markdown("---")
+    
+    # Dîner
+    st.markdown("#### 🌙 Dîner")
+    recipe = RECETTES["diner"][plan.get("diner", 0)]
+    col1, col2 = st.columns([1, 2])
+    with col1:
+        st.image(recipe['img'], use_container_width=True)
+    with col2:
+        st.markdown(f"**{recipe['nom']}**")
+        st.markdown(f"""
+        <span class="portion-luca">🏋️ Luca: {recipe['portions']['luca']}</span><br>
+        <span class="portion-sonia">🧘 Sonia: {recipe['portions']['sonia']}</span>
+        """, unsafe_allow_html=True)
+    
+    st.markdown("---")
+    
+    # Résumé calories
+    st.markdown("### 📊 Résumé Journalier")
+    col1, col2 = st.columns(2)
+    with col1:
+        st.markdown("""
+        <div style="background: #dbeafe; padding: 1rem; border-radius: 12px; text-align: center;">
+            <h3 style="margin: 0; color: #1e40af;">🏋️ Luca</h3>
+            <p style="font-size: 2rem; margin: 0.5rem 0; font-weight: 700; color: #1e40af;">~2400 kcal</p>
+            <p style="margin: 0; color: #3b82f6;">Prise de masse</p>
+        </div>
+        """, unsafe_allow_html=True)
+    with col2:
+        st.markdown("""
+        <div style="background: #fce7f3; padding: 1rem; border-radius: 12px; text-align: center;">
+            <h3 style="margin: 0; color: #be185d;">🧘 Sonia</h3>
+            <p style="font-size: 2rem; margin: 0.5rem 0; font-weight: 700; color: #be185d;">~1400 kcal</p>
+            <p style="margin: 0; color: #ec4899;">Perte de poids</p>
+        </div>
+        """, unsafe_allow_html=True)
 
 def render_measurements(user_key, default_weight):
     st.markdown("### 📏 Suivi")
@@ -560,7 +754,7 @@ def render_progress(user_key, target, start):
 # ==================== MAIN ====================
 st.markdown('<div class="main-header">💪 FitCouple</div>', unsafe_allow_html=True)
 
-tab1, tab2, tab3 = st.tabs(["🏋️ LUCA", "🧘 SONIA", "🥗 NUTRITION"])
+tab1, tab2, tab3, tab4 = st.tabs(["🏋️ LUCA", "🧘 SONIA", "🥗 RECETTES", "📅 PLANNING REPAS"])
 
 with tab1:
     st.markdown("""<div class="profile-card">
@@ -573,7 +767,7 @@ with tab1:
                    horizontal=True, key="nav_luca", label_visibility="collapsed")
     
     if nav == "📅 Programme":
-        day_idx = render_calendar(PROGRAM_LUCA)
+        day_idx = render_calendar(PROGRAM_LUCA, "luca")
         st.markdown("---")
         render_workout(PROGRAM_LUCA, day_idx, "luca")
     elif nav == "📏 Mensurations":
@@ -592,7 +786,7 @@ with tab2:
                    horizontal=True, key="nav_sonia", label_visibility="collapsed")
     
     if nav == "📅 Programme":
-        day_idx = render_calendar(PROGRAM_SONIA)
+        day_idx = render_calendar(PROGRAM_SONIA, "sonia")
         st.markdown("---")
         render_workout(PROGRAM_SONIA, day_idx, "sonia")
     elif nav == "📏 Mensurations":
@@ -603,5 +797,8 @@ with tab2:
 with tab3:
     render_nutrition()
 
+with tab4:
+    render_meal_plan()
+
 st.markdown("---")
-st.caption("💪 FitCouple v3.0")
+st.caption("💪 FitCouple v4.0")
