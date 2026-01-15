@@ -1,41 +1,56 @@
-# 💪 Fitness Tracker - Luca & Sonia
+# 💪 FitCouple - Application Fitness pour Luca & Sonia
 
-Application de suivi fitness personnalisée pour Luca et Sonia.
+Application de suivi fitness professionnelle et personnalisée.
 
-## Fonctionnalités
+## 🌟 Fonctionnalités
 
-### 🏋️ Onglet Luca
-- Objectif: Prise de masse sèche (88kg → 90kg) + perte de ventre
-- Programme: Push/Pull/Cardio/Abdos
-- Suivi du poids et tour de ventre
-- Historique des entraînements
+### 📅 Calendrier Intelligent
+- Programme hebdomadaire automatique
+- Mise en évidence du jour actuel
+- Exercices adaptés à chaque profil
 
-### 🧘 Onglet Sonia  
-- Objectif: Perte de poids (78kg → 63-68kg)
-- Programme: Bas du corps, HIIT, fessiers
-- Calcul des besoins caloriques
-- Suivi progression
+### 🎬 Vidéos démonstratives
+- Lien YouTube pour chaque exercice
+- Technique correcte pour éviter les blessures
+
+### 📈 Suivi de Performance
+- Graphiques d'évolution (poids, mensurations)
+- Progression par exercice (charges)
+- Statistiques détaillées
 
 ### 🥗 Nutrition
-- Recettes avec macros détaillées
-- Calculateur de portions
-- Objectifs macros personnalisés
-- Plans alimentaires types
+- Recettes avec macros
+- Calculateur de besoins
+- Plans alimentaires personnalisés
 
-## Déploiement
+## 📱 Installation sur iPhone
 
-1. Fork ce repo
-2. Aller sur [Streamlit Cloud](https://share.streamlit.io)
-3. Connecter votre compte GitHub
-4. Déployer l'app
+1. Ouvrir l'app dans Safari
+2. Appuyer sur le bouton Partager
+3. "Sur l'écran d'accueil"
+4. L'app s'installe comme une application native !
 
-## Accès Mobile
+## 🚀 Déploiement
 
-L'app est responsive et accessible sur mobile via le navigateur.
+1. Aller sur [share.streamlit.io](https://share.streamlit.io)
+2. Connecter ce repo GitHub
+3. Déployer
 
-## Stack technique
+## 📊 Profils
+
+### Luca
+- **Objectif:** 88kg → 90kg (prise de masse sèche)
+- **Focus:** Perte ventre + Bras/Dos/Abdos
+- **Programme:** Push/Pull/Cardio
+
+### Sonia
+- **Objectif:** 78kg → 65kg (perte de poids)
+- **Focus:** Ventre/Cuisses/Fessiers
+- **Programme:** Renforcement + HIIT
+
+## Technologies
 
 - Streamlit
 - SQLite (persistance)
 - Plotly (graphiques)
-- Pandas (données)
+- PWA (installation mobile)
