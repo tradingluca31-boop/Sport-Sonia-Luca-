@@ -30,16 +30,13 @@ st.markdown("""
     margin-bottom: 1.5rem;
 }
 
-/* NEW EXERCISE CARD DESIGN */
+/* EXERCISE CARDS */
 .exercise-card-new {
     background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
-    border-radius: 20px;
-    padding: 0;
-    margin: 1rem 0;
+    border-radius: 20px; padding: 0; margin: 1rem 0;
     box-shadow: 0 10px 40px rgba(0,0,0,0.08);
     border: 1px solid rgba(99, 102, 241, 0.1);
-    overflow: hidden;
-    transition: all 0.3s ease;
+    overflow: hidden; transition: all 0.3s ease;
 }
 .exercise-card-new:hover {
     transform: translateY(-5px);
@@ -47,120 +44,66 @@ st.markdown("""
 }
 
 .exercise-video-container {
-    position: relative;
-    width: 100%;
-    height: 200px;
-    overflow: hidden;
+    position: relative; width: 100%; height: 200px; overflow: hidden;
 }
 .exercise-video-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
+    width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease;
 }
-.exercise-card-new:hover .exercise-video-container img {
-    transform: scale(1.05);
-}
+.exercise-card-new:hover .exercise-video-container img { transform: scale(1.05); }
 .play-button {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 70px;
-    height: 70px;
-    background: rgba(255,255,255,0.95);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 28px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    transition: all 0.3s ease;
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 70px; height: 70px; background: rgba(255,255,255,0.95);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 28px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); transition: all 0.3s ease;
 }
 .exercise-card-new:hover .play-button {
-    transform: translate(-50%, -50%) scale(1.1);
-    background: #6366f1;
-    color: white;
+    transform: translate(-50%, -50%) scale(1.1); background: #6366f1; color: white;
 }
 
-.exercise-info {
-    padding: 1.2rem;
-}
-.exercise-title {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: #1e1e2e;
-    margin: 0 0 0.5rem 0;
-}
+.exercise-info { padding: 1.2rem; }
+.exercise-title { font-size: 1.1rem; font-weight: 700; color: #1e1e2e; margin: 0 0 0.5rem 0; }
 .exercise-sets {
-    display: inline-block;
-    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-    color: white;
-    padding: 0.4rem 1rem;
-    border-radius: 25px;
-    font-weight: 600;
-    font-size: 0.9rem;
-    margin-bottom: 0.5rem;
+    display: inline-block; background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    color: white; padding: 0.4rem 1rem; border-radius: 25px;
+    font-weight: 600; font-size: 0.9rem; margin-bottom: 0.5rem;
 }
 .exercise-muscle {
-    display: inline-block;
-    background: #f1f5f9;
-    color: #64748b;
-    padding: 0.3rem 0.8rem;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    font-weight: 500;
-    margin-left: 0.5rem;
+    display: inline-block; background: #f1f5f9; color: #64748b;
+    padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.75rem;
+    font-weight: 500; margin-left: 0.5rem;
 }
-.exercise-desc {
-    color: #64748b;
-    font-size: 0.85rem;
-    margin-top: 0.5rem;
-}
+.exercise-desc { color: #64748b; font-size: 0.85rem; margin-top: 0.5rem; }
 
-/* Card sans vidéo */
 .exercise-icon-box {
-    width: 100%;
-    height: 150px;
+    width: 100%; height: 150px;
     background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 4rem;
+    display: flex; align-items: center; justify-content: center; font-size: 4rem;
 }
 
-/* Recipe cards */
-.recipe-card {
-    background: white; border-radius: 20px; overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin: 1rem 0;
-    transition: transform 0.2s;
+/* MEAL CALENDAR */
+.meal-day-header {
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    color: white; padding: 1rem; border-radius: 12px 12px 0 0;
+    font-weight: 700; font-size: 1.1rem; text-align: center;
 }
-.recipe-card:hover { transform: translateY(-5px); }
-.recipe-img {
-    width: 100%; height: 180px; object-fit: cover;
+.meal-day-content {
+    background: white; border: 1px solid #e2e8f0; border-top: none;
+    border-radius: 0 0 12px 12px; padding: 1rem;
 }
-.recipe-content {
-    padding: 1rem;
+.meal-item {
+    padding: 0.8rem; margin: 0.5rem 0; border-radius: 10px;
+    border-left: 4px solid #6366f1; background: #f8fafc;
 }
-.recipe-video-btn {
-    display: inline-block; background: #ef4444; color: white !important;
-    padding: 0.5rem 1rem; border-radius: 8px; text-decoration: none;
-    font-weight: 600; font-size: 0.85rem; margin-top: 0.5rem;
+.meal-item-title { font-weight: 600; color: #1e1e2e; font-size: 0.85rem; }
+.meal-item-food { color: #64748b; font-size: 0.8rem; margin-top: 0.3rem; }
+.meal-item-kcal { 
+    display: inline-block; background: #fef3c7; color: #d97706;
+    padding: 0.2rem 0.5rem; border-radius: 10px; font-size: 0.7rem; font-weight: 600;
 }
-.recipe-video-btn:hover { background: #dc2626; }
-
-.macro-badge {
-    display: inline-block; padding: 0.3rem 0.6rem;
-    border-radius: 20px; font-size: 0.75rem; font-weight: 600;
-    margin: 0.1rem;
-}
-.macro-cal { background: #fef3c7; color: #d97706; }
-.macro-prot { background: #dbeafe; color: #2563eb; }
 
 .day-card {
     padding: 0.8rem; border-radius: 12px; text-align: center;
-    margin: 0.2rem; min-height: 80px; transition: all 0.2s;
-    cursor: pointer;
+    margin: 0.2rem; min-height: 80px; transition: all 0.2s; cursor: pointer;
 }
 .day-today {
     background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
@@ -181,31 +124,35 @@ st.markdown("""
     margin: 1.5rem 0; text-align: center;
 }
 
-/* Nutrition user cards */
-.nutrition-user-card {
-    padding: 1.5rem;
-    border-radius: 16px;
-    margin-bottom: 1rem;
-}
-.nutrition-luca {
+.nutrition-header-luca {
     background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
-    color: white;
+    color: white; padding: 1.5rem; border-radius: 16px; margin-bottom: 1.5rem;
 }
-.nutrition-sonia {
+.nutrition-header-sonia {
     background: linear-gradient(135deg, #be185d 0%, #ec4899 100%);
-    color: white;
+    color: white; padding: 1.5rem; border-radius: 16px; margin-bottom: 1.5rem;
 }
 
-.portion-tag {
-    display: inline-block;
-    padding: 0.4rem 0.8rem;
-    border-radius: 10px;
-    font-weight: 600;
-    font-size: 0.9rem;
-    margin: 0.3rem 0;
+.recipe-card {
+    background: white; border-radius: 20px; overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin: 1rem 0;
+    transition: transform 0.2s;
 }
-.portion-luca { background: #dbeafe; color: #1e40af; }
-.portion-sonia { background: #fce7f3; color: #be185d; }
+.recipe-card:hover { transform: translateY(-5px); }
+.recipe-img { width: 100%; height: 180px; object-fit: cover; }
+.recipe-content { padding: 1rem; }
+.recipe-video-btn {
+    display: inline-block; background: #ef4444; color: white !important;
+    padding: 0.5rem 1rem; border-radius: 8px; text-decoration: none;
+    font-weight: 600; font-size: 0.85rem; margin-top: 0.5rem;
+}
+
+.macro-badge {
+    display: inline-block; padding: 0.3rem 0.6rem;
+    border-radius: 20px; font-size: 0.75rem; font-weight: 600; margin: 0.1rem;
+}
+.macro-cal { background: #fef3c7; color: #d97706; }
+.macro-prot { background: #dbeafe; color: #2563eb; }
 
 #MainMenu {visibility: hidden;}
 footer {visibility: hidden;}
@@ -214,12 +161,8 @@ header {visibility: hidden;}
 .stTabs [data-baseweb="tab-list"] {
     gap: 8px; background: #f1f5f9; padding: 8px; border-radius: 16px;
 }
-.stTabs [data-baseweb="tab"] {
-    padding: 12px 24px; border-radius: 12px; font-weight: 600;
-}
-.stTabs [aria-selected="true"] {
-    background: white; box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
+.stTabs [data-baseweb="tab"] { padding: 12px 24px; border-radius: 12px; font-weight: 600; }
+.stTabs [aria-selected="true"] { background: white; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
 </style>
 """, unsafe_allow_html=True)
 
@@ -229,9 +172,8 @@ if 'weight_luca' not in st.session_state:
 if 'weight_sonia' not in st.session_state:
     st.session_state.weight_sonia = []
 
-# ==================== EXERCICES (Vidéos vérifiées) ====================
+# ==================== EXERCICES ====================
 EXERCICES = {
-    # PUSH
     "Pompes classiques": {"video": "IODxDxX7oi4", "muscle": "Pectoraux", "desc": "Le basique pour des pecs en béton", "icon": "💪"},
     "Pompes inclinées": {"video": "cfns5VDVVvk", "muscle": "Haut des pecs", "desc": "Cible le haut de la poitrine", "icon": "💪"},
     "Pompes serrées": {"video": "J0DnG1_S92I", "muscle": "Triceps", "desc": "Focus triceps", "icon": "💪"},
@@ -240,13 +182,11 @@ EXERCICES = {
     "Développé haltères": {"video": "VmB1G1K7v94", "muscle": "Épaules", "desc": "Masse pour les épaules", "icon": "🏋️"},
     "Élévations latérales": {"video": "3VcKaXpzqRo", "muscle": "Épaules", "desc": "Épaules larges", "icon": "🏋️"},
     "Extension triceps": {"video": "nRiJVZDpdL0", "muscle": "Triceps", "desc": "Isolation triceps", "icon": "💪"},
-    # PULL
     "Rowing haltère": {"video": "roCP6wCXPqo", "muscle": "Dos", "desc": "Dos épais", "icon": "🔙"},
     "Superman": {"video": "z6PJMT2y8GQ", "muscle": "Lombaires", "desc": "Renforce le bas du dos", "icon": "🦸"},
     "Oiseau": {"video": "EA7u4Q_8HQ0", "muscle": "Arrière épaule", "desc": "Arrière d'épaule", "icon": "🐦"},
     "Curl biceps": {"video": "ykJmrZ5v0Oo", "muscle": "Biceps", "desc": "Gros biceps", "icon": "💪"},
     "Curl marteau": {"video": "zC3nLlEvin4", "muscle": "Biceps", "desc": "Biceps + avant-bras", "icon": "🔨"},
-    # LEGS
     "Squats": {"video": "YaXPRqUwItQ", "muscle": "Quadriceps", "desc": "Le roi des jambes", "icon": "🦵"},
     "Squats sumo": {"video": "9ZuXKqRbT9k", "muscle": "Adducteurs", "desc": "Intérieur cuisses", "icon": "🦵"},
     "Fentes": {"video": "QOVaHwm-Q6U", "muscle": "Quadriceps/Fessiers", "desc": "Jambes sculptées", "icon": "🦵"},
@@ -254,13 +194,11 @@ EXERCICES = {
     "Glute bridge": {"video": "OUgsJ8-Vi0E", "muscle": "Fessiers", "desc": "Activation fessiers", "icon": "🍑"},
     "Donkey kicks": {"video": "SJ1Xuz9D-ZQ", "muscle": "Fessiers", "desc": "Galbe fessiers", "icon": "🍑"},
     "Fire hydrants": {"video": "La3xrTxLXSE", "muscle": "Fessiers", "desc": "Fessiers latéraux", "icon": "🔥"},
-    # CARDIO
     "Jumping jacks": {"video": "c4DAnQ6DtF8", "muscle": "Cardio", "desc": "Échauffement", "icon": "⭐"},
     "Burpees": {"video": "TU8QYVW0gDU", "muscle": "Full body", "desc": "Brûleur de calories", "icon": "🔥"},
     "High knees": {"video": "D0bLJnSBNI8", "muscle": "Cardio", "desc": "Cardio intense", "icon": "🏃"},
     "Squat jumps": {"video": "A-cFYWvaHr0", "muscle": "Jambes/Cardio", "desc": "Explosivité", "icon": "🦘"},
     "Mountain climbers": {"video": "nmwgirgXLYM", "muscle": "Core/Cardio", "desc": "Abdos + cardio", "icon": "⛰️"},
-    # CORE
     "Gainage (Planche)": {"video": "ASdvN_XEl_c", "muscle": "Core", "desc": "Core solide", "icon": "🧘"},
     "Gainage latéral": {"video": "K2VljzCC16g", "muscle": "Obliques", "desc": "Obliques", "icon": "🧘"},
     "Crunch": {"video": "Xyd_fa5zoEU", "muscle": "Abdos", "desc": "Le classique", "icon": "🔥"},
@@ -268,243 +206,107 @@ EXERCICES = {
     "Scissor kicks": {"video": "WoNCIBVLbgY", "muscle": "Bas abdos", "desc": "Bas du ventre", "icon": "✂️"},
     "V-ups": {"video": "iP2fjvG0g3w", "muscle": "Abdos", "desc": "Abdos intense", "icon": "🔥"},
     "Bicycle crunch": {"video": "9FGilxCbdz8", "muscle": "Obliques", "desc": "Abdos + obliques", "icon": "🚴"},
-    # Exercices sans vidéo (repos/cardio simple)
     "Marche/Vélo léger": {"video": "", "muscle": "Cardio léger", "desc": "Récupération active", "icon": "🚶"},
     "Marche rapide/Vélo": {"video": "", "muscle": "Cardio", "desc": "Cardio modéré", "icon": "🚴"},
     "Vélo ou Course": {"video": "", "muscle": "Cardio", "desc": "Endurance", "icon": "🏃"},
     "Étirements": {"video": "", "muscle": "Flexibilité", "desc": "Récupération", "icon": "🧘"},
 }
 
-# ==================== RECETTES LUCA (Prise de masse ~2400 kcal) ====================
-RECETTES_LUCA = {
-    "petit_dejeuner": [
-        {
-            "nom": "🥞 Pancakes Protéinés XL",
-            "img": "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400",
-            "video": "https://www.youtube.com/watch?v=N8iUYICFkvI",
-            "kcal": 550, "prot": 40,
-            "ingredients": ["2 bananes", "3 oeufs", "60g flocons d'avoine", "40g whey vanille", "1 c.c levure", "Beurre de cacahuète"],
-            "prep": "Mixer tout. Cuire 4-5 gros pancakes. Servir avec beurre de cacahuète et fruits.",
-        },
-        {
-            "nom": "🥑 Double Toast Avocat",
-            "img": "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=400",
-            "video": "https://www.youtube.com/watch?v=66btvAWmp7g",
-            "kcal": 580, "prot": 28,
-            "ingredients": ["2 tranches pain complet", "1 avocat entier", "2 oeufs", "Saumon fumé 50g", "Citron"],
-            "prep": "Toaster le pain. Écraser l'avocat. Pocher les oeufs. Ajouter saumon.",
-        },
-        {
-            "nom": "🫐 Overnight Oats Masse",
-            "img": "https://images.unsplash.com/photo-1517673400267-0251440c45dc?w=400",
-            "video": "https://www.youtube.com/watch?v=O9Hf_8WvSKE",
-            "kcal": 520, "prot": 35,
-            "ingredients": ["80g flocons d'avoine", "200ml lait entier", "200g yaourt grec", "30g whey", "Fruits", "Amandes"],
-            "prep": "Mélanger tout la veille. Ajouter fruits et amandes le matin.",
-        },
-    ],
-    "dejeuner": [
-        {
-            "nom": "🍛 Buddha Bowl XL Poulet",
-            "img": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400",
-            "video": "https://www.youtube.com/watch?v=Yz-x10gXRCI",
-            "kcal": 680, "prot": 55,
-            "ingredients": ["220g poulet", "150g quinoa cuit", "1 avocat", "100g pois chiches", "Légumes variés", "Sauce tahini"],
-            "prep": "Cuire quinoa et poulet. Assembler le bowl. Sauce généreuse.",
-        },
-        {
-            "nom": "🌮 Double Wrap Poulet",
-            "img": "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=400",
-            "video": "https://www.youtube.com/watch?v=5GqbKMxb7x0",
-            "kcal": 650, "prot": 52,
-            "ingredients": ["2 tortillas complètes", "200g poulet", "Riz 100g", "Haricots noirs", "Fromage", "Sauce"],
-            "prep": "Griller poulet. Préparer garniture. Rouler les 2 wraps.",
-        },
-        {
-            "nom": "🍝 Poke Bowl Saumon XL",
-            "img": "https://images.unsplash.com/photo-1546069901-d5bfd2cbfb1f?w=400",
-            "video": "https://www.youtube.com/watch?v=c_5LP3k9cHs",
-            "kcal": 620, "prot": 45,
-            "ingredients": ["200g saumon frais", "150g riz", "1 avocat", "Edamame 100g", "Mangue", "Sauce soja"],
-            "prep": "Cuire riz. Couper saumon. Assembler avec toppings généreux.",
-        },
-    ],
-    "diner": [
-        {
-            "nom": "🍛 Curry Poulet Complet",
-            "img": "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400",
-            "video": "https://www.youtube.com/watch?v=iFTlWbo8ZQk",
-            "kcal": 580, "prot": 50,
-            "ingredients": ["250g poulet", "Lait de coco", "Curry", "Légumes", "150g riz basmati"],
-            "prep": "Revenir poulet et légumes. Ajouter curry et coco. Servir avec riz.",
-        },
-        {
-            "nom": "🐟 Pavé Saumon + Patate Douce",
-            "img": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400",
-            "video": "https://www.youtube.com/watch?v=4TfwtSqXhHo",
-            "kcal": 550, "prot": 45,
-            "ingredients": ["220g saumon", "200g patate douce", "Brocoli", "Citron", "Huile d'olive"],
-            "prep": "Four: saumon 20min, patate douce 35min. Brocoli vapeur.",
-        },
-        {
-            "nom": "🍝 Pasta Poulet Pesto",
-            "img": "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=400",
-            "video": "https://www.youtube.com/watch?v=bJUiWdM__Qw",
-            "kcal": 650, "prot": 48,
-            "ingredients": ["150g pâtes complètes", "200g poulet", "Pesto", "Tomates cerises", "Parmesan"],
-            "prep": "Cuire pâtes. Griller poulet. Mélanger avec pesto. Parmesan.",
-        },
-    ],
-    "collation": [
-        {
-            "nom": "🥤 Shake Masse Chocolat",
-            "img": "https://images.unsplash.com/photo-1553530666-ba11a90a0868?w=400",
-            "video": "https://www.youtube.com/watch?v=eMxY0xLrHd0",
-            "kcal": 450, "prot": 40,
-            "ingredients": ["40g whey chocolat", "300ml lait entier", "1 banane", "2 c.s beurre cacahuète", "Avoine 30g"],
-            "prep": "Mixer tout jusqu'à consistance lisse.",
-        },
-        {
-            "nom": "🥜 Mix Énergétique",
-            "img": "https://images.unsplash.com/photo-1604329760661-e71dc83f8f26?w=400",
-            "video": "https://www.youtube.com/watch?v=jpKjz8vfKb8",
-            "kcal": 350, "prot": 15,
-            "ingredients": ["50g amandes", "30g noix de cajou", "30g raisins secs", "Chocolat noir 20g"],
-            "prep": "Mélanger et portionner. Snack parfait.",
-        },
-        {
-            "nom": "🍌 Bowl Protéiné",
-            "img": "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400",
-            "video": "https://www.youtube.com/watch?v=_2eqlzCo3kU",
-            "kcal": 380, "prot": 30,
-            "ingredients": ["300g yaourt grec", "50g granola", "Miel", "Banane", "Amandes"],
-            "prep": "Yaourt + toppings. Simple et efficace.",
-        },
-    ]
-}
-
-# ==================== RECETTES SONIA (Perte de poids ~1400 kcal) ====================
-RECETTES_SONIA = {
-    "petit_dejeuner": [
-        {
-            "nom": "🥞 Mini Pancakes Light",
-            "img": "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400",
-            "video": "https://www.youtube.com/watch?v=N8iUYICFkvI",
-            "kcal": 280, "prot": 20,
-            "ingredients": ["1 banane", "2 blancs d'oeuf + 1 entier", "25g flocons d'avoine", "20g whey", "Cannelle"],
-            "prep": "Mixer. Cuire 2-3 petits pancakes. Servir avec fruits rouges.",
-        },
-        {
-            "nom": "🥑 Toast Avocat Light",
-            "img": "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=400",
-            "video": "https://www.youtube.com/watch?v=66btvAWmp7g",
-            "kcal": 300, "prot": 15,
-            "ingredients": ["1 tranche pain complet", "1/2 avocat", "1 oeuf poché", "Citron", "Graines de chia"],
-            "prep": "Toast léger. Avocat écrasé. Oeuf poché. Graines.",
-        },
-        {
-            "nom": "🫐 Overnight Oats Light",
-            "img": "https://images.unsplash.com/photo-1517673400267-0251440c45dc?w=400",
-            "video": "https://www.youtube.com/watch?v=O9Hf_8WvSKE",
-            "kcal": 260, "prot": 18,
-            "ingredients": ["40g flocons d'avoine", "150ml lait d'amande", "100g yaourt grec 0%", "Fruits rouges", "Stevia"],
-            "prep": "Mélanger la veille. Fruits frais le matin.",
-        },
-    ],
-    "dejeuner": [
-        {
-            "nom": "🥗 Salade Buddha Light",
-            "img": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400",
-            "video": "https://www.youtube.com/watch?v=Yz-x10gXRCI",
-            "kcal": 380, "prot": 35,
-            "ingredients": ["120g poulet grillé", "Quinoa 60g", "1/4 avocat", "Légumes variés", "Vinaigrette légère"],
-            "prep": "Griller poulet. Cuire quinoa. Assembler salade colorée.",
-        },
-        {
-            "nom": "🌮 Wrap Léger",
-            "img": "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=400",
-            "video": "https://www.youtube.com/watch?v=5GqbKMxb7x0",
-            "kcal": 350, "prot": 30,
-            "ingredients": ["1 tortilla complète", "120g poulet", "Salade", "Tomates", "Sauce yaourt 0%"],
-            "prep": "Poulet grillé. Légumes frais. Rouler.",
-        },
-        {
-            "nom": "🍣 Poke Light",
-            "img": "https://images.unsplash.com/photo-1546069901-d5bfd2cbfb1f?w=400",
-            "video": "https://www.youtube.com/watch?v=c_5LP3k9cHs",
-            "kcal": 360, "prot": 30,
-            "ingredients": ["130g saumon", "Riz 60g", "Concombre", "Edamame 50g", "Sauce soja allégée"],
-            "prep": "Portion légère de riz. Saumon frais. Légumes croquants.",
-        },
-    ],
-    "diner": [
-        {
-            "nom": "🍛 Curry Poulet Ultra Light",
-            "img": "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400",
-            "video": "https://www.youtube.com/watch?v=iFTlWbo8ZQk",
-            "kcal": 320, "prot": 35,
-            "ingredients": ["150g poulet", "Lait de coco light", "Curry", "Légumes variés", "PAS de riz"],
-            "prep": "Poulet et légumes. Curry + coco light. Servir sans féculent.",
-        },
-        {
-            "nom": "🐟 Papillote Saumon Légumes",
-            "img": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400",
-            "video": "https://www.youtube.com/watch?v=4TfwtSqXhHo",
-            "kcal": 300, "prot": 32,
-            "ingredients": ["150g saumon", "Courgettes", "Tomates", "Citron", "Herbes fraîches"],
-            "prep": "Papillote au four 20min. Zéro matière grasse ajoutée.",
-        },
-        {
-            "nom": "🍜 Wok Crevettes Light",
-            "img": "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=400",
-            "video": "https://www.youtube.com/watch?v=MeD8bDgYy2s",
-            "kcal": 280, "prot": 28,
-            "ingredients": ["180g crevettes", "Brocoli", "Poivrons", "Champignons", "Sauce soja légère"],
-            "prep": "Wok à sec. Crevettes + légumes. Sauce soja en fin.",
-        },
-    ],
-    "collation": [
-        {
-            "nom": "🥤 Smoothie Light",
-            "img": "https://images.unsplash.com/photo-1553530666-ba11a90a0868?w=400",
-            "video": "https://www.youtube.com/watch?v=eMxY0xLrHd0",
-            "kcal": 180, "prot": 20,
-            "ingredients": ["20g whey vanille", "200ml lait d'amande", "Fruits rouges", "Glaçons"],
-            "prep": "Mixer. Rafraîchissant et léger.",
-        },
-        {
-            "nom": "🍫 2 Energy Balls",
-            "img": "https://images.unsplash.com/photo-1604329760661-e71dc83f8f26?w=400",
-            "video": "https://www.youtube.com/watch?v=jpKjz8vfKb8",
-            "kcal": 120, "prot": 5,
-            "ingredients": ["Dattes", "Amandes", "Cacao", "Seulement 2 boules!"],
-            "prep": "Portion contrôlée: 2 boules max.",
-        },
-        {
-            "nom": "🍌 Yaourt Grec Simple",
-            "img": "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400",
-            "video": "https://www.youtube.com/watch?v=_2eqlzCo3kU",
-            "kcal": 140, "prot": 15,
-            "ingredients": ["150g yaourt grec 0%", "Quelques fruits", "Cannelle", "Pas de granola!"],
-            "prep": "Simple: yaourt + fruits + cannelle.",
-        },
-    ]
-}
-
-# ==================== PLANNING REPAS ====================
-MEAL_PLAN = {
-    0: {"petit_dej": 0, "dejeuner": 0, "diner": 0, "collation": 0},
-    1: {"petit_dej": 1, "dejeuner": 1, "diner": 1, "collation": 1},
-    2: {"petit_dej": 2, "dejeuner": 2, "diner": 2, "collation": 2},
-    3: {"petit_dej": 0, "dejeuner": 0, "diner": 1, "collation": 0},
-    4: {"petit_dej": 1, "dejeuner": 1, "diner": 0, "collation": 1},
-    5: {"petit_dej": 2, "dejeuner": 2, "diner": 2, "collation": 2},
-    6: {"petit_dej": 0, "dejeuner": 0, "diner": 1, "collation": 0},
-}
-
-# ==================== PROGRAMMES ====================
+# ==================== CALENDRIER REPAS LUCA (Prise de masse ~2500 kcal) ====================
 JOURS = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"]
 
+MENU_LUCA = {
+    0: {  # Lundi
+        "petit_dej": {"nom": "Petit-déjeuner", "plat": "3 oeufs brouillés + 2 tranches pain complet + 1 banane + café", "kcal": 550},
+        "dejeuner": {"nom": "Déjeuner", "plat": "200g poulet grillé + 150g riz + haricots verts + huile d'olive", "kcal": 650},
+        "collation": {"nom": "Collation", "plat": "Shake: 40g whey + lait + 1 banane + beurre de cacahuète", "kcal": 450},
+        "diner": {"nom": "Dîner", "plat": "200g saumon + 200g patate douce + brocoli", "kcal": 580},
+    },
+    1: {  # Mardi
+        "petit_dej": {"nom": "Petit-déjeuner", "plat": "100g flocons avoine + lait + 30g whey + fruits rouges", "kcal": 520},
+        "dejeuner": {"nom": "Déjeuner", "plat": "200g steak haché 5% + 150g pâtes complètes + sauce tomate", "kcal": 680},
+        "collation": {"nom": "Collation", "plat": "250g fromage blanc + 30g amandes + miel", "kcal": 380},
+        "diner": {"nom": "Dîner", "plat": "2 filets de poulet + quinoa 150g + légumes grillés", "kcal": 550},
+    },
+    2: {  # Mercredi
+        "petit_dej": {"nom": "Petit-déjeuner", "plat": "Omelette 4 oeufs + fromage + 2 tranches pain complet", "kcal": 580},
+        "dejeuner": {"nom": "Déjeuner", "plat": "Wrap: 2 tortillas + 180g poulet + avocat + crudités", "kcal": 650},
+        "collation": {"nom": "Collation", "plat": "2 bananes + 40g beurre de cacahuète", "kcal": 420},
+        "diner": {"nom": "Dîner", "plat": "220g cabillaud + riz 150g + épinards", "kcal": 520},
+    },
+    3: {  # Jeudi
+        "petit_dej": {"nom": "Petit-déjeuner", "plat": "3 oeufs au plat + 2 tranches bacon + pain complet", "kcal": 560},
+        "dejeuner": {"nom": "Déjeuner", "plat": "Buddha bowl: 180g poulet + quinoa + pois chiches + avocat", "kcal": 680},
+        "collation": {"nom": "Collation", "plat": "Shake protéiné + 1 poignée noix de cajou", "kcal": 400},
+        "diner": {"nom": "Dîner", "plat": "Curry poulet 200g + riz basmati 150g + lait coco", "kcal": 620},
+    },
+    4: {  # Vendredi
+        "petit_dej": {"nom": "Petit-déjeuner", "plat": "Porridge 80g avoine + whey + banane + beurre cacahuète", "kcal": 580},
+        "dejeuner": {"nom": "Déjeuner", "plat": "Poke bowl: 180g saumon + riz + avocat + edamame", "kcal": 650},
+        "collation": {"nom": "Collation", "plat": "300g yaourt grec + granola + fruits", "kcal": 380},
+        "diner": {"nom": "Dîner", "plat": "Pâtes bolognaise: 150g pâtes + 200g viande hachée", "kcal": 650},
+    },
+    5: {  # Samedi
+        "petit_dej": {"nom": "Petit-déjeuner", "plat": "4 oeufs brouillés + avocat + 2 toasts + jus d'orange", "kcal": 620},
+        "dejeuner": {"nom": "Déjeuner", "plat": "Burger maison: steak 180g + pain complet + frites patate douce", "kcal": 750},
+        "collation": {"nom": "Collation", "plat": "Smoothie: lait + whey + flocons avoine + banane", "kcal": 450},
+        "diner": {"nom": "Dîner", "plat": "Entrecôte 200g + purée maison + haricots verts", "kcal": 650},
+    },
+    6: {  # Dimanche
+        "petit_dej": {"nom": "Petit-déjeuner", "plat": "Omelette complète: 4 oeufs + jambon + fromage + pain", "kcal": 600},
+        "dejeuner": {"nom": "Déjeuner", "plat": "Poulet rôti 250g + pommes de terre + légumes rôtis", "kcal": 700},
+        "collation": {"nom": "Collation", "plat": "Fromage blanc 250g + miel + amandes", "kcal": 350},
+        "diner": {"nom": "Dîner", "plat": "Saumon teriyaki 200g + riz + légumes sautés", "kcal": 580},
+    },
+}
+
+# ==================== CALENDRIER REPAS SONIA (Perte de poids ~1300-1400 kcal) ====================
+MENU_SONIA = {
+    0: {  # Lundi
+        "petit_dej": {"nom": "Petit-déjeuner", "plat": "2 oeufs durs + 1 tranche pain complet + thé vert", "kcal": 280},
+        "dejeuner": {"nom": "Déjeuner", "plat": "Salade: 120g poulet grillé + quinoa 50g + légumes + vinaigrette légère", "kcal": 380},
+        "collation": {"nom": "Collation", "plat": "1 pomme + 10 amandes", "kcal": 150},
+        "diner": {"nom": "Dîner", "plat": "150g poisson blanc + courgettes grillées + citron (SANS féculents)", "kcal": 280},
+    },
+    1: {  # Mardi
+        "petit_dej": {"nom": "Petit-déjeuner", "plat": "150g yaourt grec 0% + 30g flocons avoine + fruits rouges", "kcal": 250},
+        "dejeuner": {"nom": "Déjeuner", "plat": "Wrap léger: 1 tortilla + 100g dinde + crudités + sauce yaourt", "kcal": 350},
+        "collation": {"nom": "Collation", "plat": "1 banane", "kcal": 100},
+        "diner": {"nom": "Dîner", "plat": "Soupe de légumes maison + 1 oeuf poché + salade verte", "kcal": 250},
+    },
+    2: {  # Mercredi
+        "petit_dej": {"nom": "Petit-déjeuner", "plat": "1 oeuf + 1 blanc d'oeuf brouillés + 1/2 avocat + café", "kcal": 280},
+        "dejeuner": {"nom": "Déjeuner", "plat": "Salade niçoise: thon 100g + haricots verts + oeuf + olives", "kcal": 400},
+        "collation": {"nom": "Collation", "plat": "100g fromage blanc 0% + cannelle", "kcal": 80},
+        "diner": {"nom": "Dîner", "plat": "Blanc de poulet 130g + ratatouille maison (SANS féculents)", "kcal": 300},
+    },
+    3: {  # Jeudi
+        "petit_dej": {"nom": "Petit-déjeuner", "plat": "Smoothie: lait amande + 20g whey + épinards + 1/2 banane", "kcal": 220},
+        "dejeuner": {"nom": "Déjeuner", "plat": "Bol: 100g crevettes + riz 60g + concombre + sauce soja", "kcal": 350},
+        "collation": {"nom": "Collation", "plat": "Bâtonnets de carottes + houmous 30g", "kcal": 120},
+        "diner": {"nom": "Dîner", "plat": "Papillote saumon 130g + brocoli + citron (SANS féculents)", "kcal": 320},
+    },
+    4: {  # Vendredi
+        "petit_dej": {"nom": "Petit-déjeuner", "plat": "2 tranches pain complet + 1 oeuf poché + tomate", "kcal": 270},
+        "dejeuner": {"nom": "Déjeuner", "plat": "Salade César light: 120g poulet + salade + parmesan + sauce légère", "kcal": 380},
+        "collation": {"nom": "Collation", "plat": "150g yaourt grec 0% nature", "kcal": 90},
+        "diner": {"nom": "Dîner", "plat": "Wok crevettes 150g + légumes (brocoli, poivrons, champignons)", "kcal": 280},
+    },
+    5: {  # Samedi
+        "petit_dej": {"nom": "Petit-déjeuner", "plat": "Omelette 2 oeufs + épinards + feta + thé", "kcal": 300},
+        "dejeuner": {"nom": "Déjeuner", "plat": "Poke bowl light: 100g saumon + riz 50g + avocat 1/4 + edamame", "kcal": 400},
+        "collation": {"nom": "Collation", "plat": "1 poire + quelques noix", "kcal": 130},
+        "diner": {"nom": "Dîner", "plat": "Filet de poulet 130g + salade composée + vinaigrette maison", "kcal": 280},
+    },
+    6: {  # Dimanche (repas plaisir modéré)
+        "petit_dej": {"nom": "Petit-déjeuner", "plat": "2 oeufs brouillés + 1 tranche pain complet + 1/2 avocat", "kcal": 350},
+        "dejeuner": {"nom": "Déjeuner", "plat": "Poulet grillé 150g + légumes rôtis + 1 petite portion riz", "kcal": 450},
+        "collation": {"nom": "Collation", "plat": "2 carrés chocolat noir 70% + thé", "kcal": 100},
+        "diner": {"nom": "Dîner", "plat": "Soupe légumes + salade de tomates mozzarella (portion légère)", "kcal": 300},
+    },
+}
+
+# ==================== PROGRAMMES SPORT ====================
 PROGRAM_LUCA = {
     0: {"nom": "PUSH", "emoji": "💪", "type": "Pecs/Épaules/Triceps", "duree": 50, "abdos": True,
         "exercices": [
@@ -658,7 +460,6 @@ def render_exercise_card_new(nom, sets):
     icon = ex.get('icon', '🏋️')
     
     if not video_id:
-        # Card sans vidéo - avec icône
         st.markdown(f"""
         <div class="exercise-card-new">
             <div class="exercise-icon-box">{icon}</div>
@@ -704,7 +505,6 @@ def render_workout(program, day_idx, user_key):
     
     st.markdown("---")
     
-    # Affichage en grille 2 colonnes
     exercices = workout.get('exercices', [])
     for i in range(0, len(exercices), 2):
         cols = st.columns(2)
@@ -732,138 +532,144 @@ def render_workout(program, day_idx, user_key):
     
     col1, col2 = st.columns([3, 1])
     with col1:
-        feeling = st.slider("Comment était ta séance ?", 1, 5, 3, key=f"feel_{user_key}_{day_idx}")
+        st.slider("Comment était ta séance ?", 1, 5, 3, key=f"feel_{user_key}_{day_idx}")
     with col2:
         if st.button("✅ Terminé !", key=f"btn_{user_key}_{day_idx}", type="primary", use_container_width=True):
             st.balloons()
             st.success("🎉 Bravo !")
 
-def render_recipe_card(recipe):
+def render_meal_calendar_luca():
+    st.markdown("""
+    <div class="nutrition-header-luca">
+        <h2 style="margin: 0;">🏋️ PLANNING REPAS LUCA</h2>
+        <p style="margin: 0.5rem 0 0 0;">Prise de masse • ~2500 kcal/jour • Protéines élevées</p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    today_idx = date.today().weekday()
+    
+    # Sélecteur de jour
+    selected_day = st.selectbox(
+        "📅 Voir le menu du jour",
+        options=list(range(7)),
+        format_func=lambda x: f"{'👉 Aujourd'hui - ' if x == today_idx else ''}{JOURS[x]}",
+        index=today_idx,
+        key="meal_day_luca"
+    )
+    
+    menu = MENU_LUCA[selected_day]
+    
     st.markdown(f"""
-    <div class="recipe-card">
-        <img src="{recipe['img']}" class="recipe-img" alt="{recipe['nom']}">
-        <div class="recipe-content">
-            <h4 style="margin: 0 0 0.3rem 0;">{recipe['nom']}</h4>
-            <div style="margin-bottom: 0.5rem;">
-                <span class="macro-badge macro-cal">{recipe['kcal']} kcal</span>
-                <span class="macro-badge macro-prot">{recipe['prot']}g prot</span>
-            </div>
-            <a href="{recipe['video']}" target="_blank" class="recipe-video-btn">▶️ Vidéo recette</a>
+    <div class="meal-day-header">📆 {JOURS[selected_day]}</div>
+    <div class="meal-day-content">
+    """, unsafe_allow_html=True)
+    
+    total_kcal = 0
+    for key in ["petit_dej", "dejeuner", "collation", "diner"]:
+        meal = menu[key]
+        total_kcal += meal["kcal"]
+        st.markdown(f"""
+        <div class="meal-item">
+            <div class="meal-item-title">🍽️ {meal['nom']}</div>
+            <div class="meal-item-food">{meal['plat']}</div>
+            <span class="meal-item-kcal">{meal['kcal']} kcal</span>
         </div>
+        """, unsafe_allow_html=True)
+    
+    st.markdown("</div>", unsafe_allow_html=True)
+    
+    # Total journée
+    st.markdown(f"""
+    <div style="background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+                color: white; padding: 1.5rem; border-radius: 16px; text-align: center; margin-top: 1rem;">
+        <h3 style="margin: 0;">📊 TOTAL JOURNÉE</h3>
+        <p style="font-size: 2.5rem; margin: 0.5rem 0; font-weight: 700;">{total_kcal} kcal</p>
+        <p style="margin: 0; opacity: 0.9;">Objectif: ~2500 kcal</p>
     </div>
     """, unsafe_allow_html=True)
     
-    with st.expander("📝 Ingrédients & Préparation"):
-        st.markdown("**Ingrédients:**")
-        for ing in recipe['ingredients']:
-            st.markdown(f"• {ing}")
-        st.markdown(f"\n**Préparation:** {recipe['prep']}")
+    # Vue semaine complète
+    with st.expander("📅 Voir toute la semaine"):
+        for day_idx in range(7):
+            menu = MENU_LUCA[day_idx]
+            total = sum(menu[k]["kcal"] for k in ["petit_dej", "dejeuner", "collation", "diner"])
+            st.markdown(f"**{JOURS[day_idx]}** - {total} kcal")
+            for key in ["petit_dej", "dejeuner", "collation", "diner"]:
+                st.caption(f"  • {menu[key]['nom']}: {menu[key]['plat']}")
+            st.markdown("---")
 
-def render_nutrition_luca():
+def render_meal_calendar_sonia():
     st.markdown("""
-    <div class="nutrition-user-card nutrition-luca">
-        <h2 style="margin: 0;">🏋️ Alimentation LUCA</h2>
-        <p style="margin: 0.5rem 0 0 0;">Prise de masse • ~2400 kcal/jour • Protéines ++</p>
+    <div class="nutrition-header-sonia">
+        <h2 style="margin: 0;">🧘 PLANNING REPAS SONIA</h2>
+        <p style="margin: 0.5rem 0 0 0;">Perte de poids • ~1300-1400 kcal/jour • Peu de féculents le soir</p>
     </div>
     """, unsafe_allow_html=True)
     
-    category = st.selectbox(
-        "Quel repas ?",
-        ["🍳 Petit-déjeuner", "🍝 Déjeuner", "🌙 Dîner", "🍪 Collation"],
-        key="cat_luca"
-    )
+    st.info("💡 **Règle d'or**: Pas de féculents le soir pour maximiser la perte de poids !")
     
-    cat_map = {
-        "🍳 Petit-déjeuner": "petit_dejeuner",
-        "🍝 Déjeuner": "dejeuner",
-        "🌙 Dîner": "diner",
-        "🍪 Collation": "collation"
-    }
-    
-    recipes = RECETTES_LUCA.get(cat_map[category], [])
-    
-    cols = st.columns(3)
-    for idx, recipe in enumerate(recipes):
-        with cols[idx % 3]:
-            render_recipe_card(recipe)
-
-def render_nutrition_sonia():
-    st.markdown("""
-    <div class="nutrition-user-card nutrition-sonia">
-        <h2 style="margin: 0;">🧘 Alimentation SONIA</h2>
-        <p style="margin: 0.5rem 0 0 0;">Perte de poids • ~1400 kcal/jour • Light & Healthy</p>
-    </div>
-    """, unsafe_allow_html=True)
-    
-    category = st.selectbox(
-        "Quel repas ?",
-        ["🍳 Petit-déjeuner", "🍝 Déjeuner", "🌙 Dîner", "🍪 Collation"],
-        key="cat_sonia"
-    )
-    
-    cat_map = {
-        "🍳 Petit-déjeuner": "petit_dejeuner",
-        "🍝 Déjeuner": "dejeuner",
-        "🌙 Dîner": "diner",
-        "🍪 Collation": "collation"
-    }
-    
-    recipes = RECETTES_SONIA.get(cat_map[category], [])
-    
-    cols = st.columns(3)
-    for idx, recipe in enumerate(recipes):
-        with cols[idx % 3]:
-            render_recipe_card(recipe)
-
-def render_meal_plan():
-    st.markdown("## 📅 Planning Repas Semaine")
-    
-    who = st.radio("Pour qui ?", ["🏋️ Luca", "🧘 Sonia"], horizontal=True, key="meal_who")
+    today_idx = date.today().weekday()
     
     selected_day = st.selectbox(
-        "📅 Jour",
+        "📅 Voir le menu du jour",
         options=list(range(7)),
-        format_func=lambda x: JOURS[x],
-        index=date.today().weekday(),
-        key="meal_day"
+        format_func=lambda x: f"{'👉 Aujourd'hui - ' if x == today_idx else ''}{JOURS[x]}",
+        index=today_idx,
+        key="meal_day_sonia"
     )
     
-    plan = MEAL_PLAN.get(selected_day, {})
-    recettes = RECETTES_LUCA if who == "🏋️ Luca" else RECETTES_SONIA
+    menu = MENU_SONIA[selected_day]
     
-    st.markdown(f"### Menu {JOURS[selected_day]}")
-    
-    meals = [
-        ("🍳 Petit-déjeuner", "petit_dejeuner", "petit_dej"),
-        ("🍝 Déjeuner", "dejeuner", "dejeuner"),
-        ("🍪 Collation", "collation", "collation"),
-        ("🌙 Dîner", "diner", "diner"),
-    ]
-    
-    for title, cat, plan_key in meals:
-        recipe = recettes[cat][plan.get(plan_key, 0)]
-        col1, col2 = st.columns([1, 3])
-        with col1:
-            st.image(recipe['img'], use_container_width=True)
-        with col2:
-            st.markdown(f"**{title}**")
-            st.markdown(f"### {recipe['nom']}")
-            st.markdown(f"🔥 {recipe['kcal']} kcal | 💪 {recipe['prot']}g protéines")
-        st.markdown("---")
-    
-    # Total
-    total_kcal = sum(recettes[cat][plan.get(plan_key, 0)]['kcal'] for _, cat, plan_key in meals)
-    total_prot = sum(recettes[cat][plan.get(plan_key, 0)]['prot'] for _, cat, plan_key in meals)
-    
-    color = "#1e40af" if who == "🏋️ Luca" else "#be185d"
     st.markdown(f"""
-    <div style="background: linear-gradient(135deg, {color} 0%, {color}99 100%); 
-                color: white; padding: 1.5rem; border-radius: 16px; text-align: center;">
-        <h3 style="margin: 0;">📊 Total Journée</h3>
-        <p style="font-size: 2rem; margin: 0.5rem 0; font-weight: 700;">{total_kcal} kcal</p>
-        <p style="margin: 0;">{total_prot}g protéines</p>
+    <div class="meal-day-header" style="background: linear-gradient(135deg, #be185d 0%, #ec4899 100%);">
+        📆 {JOURS[selected_day]}
+    </div>
+    <div class="meal-day-content">
+    """, unsafe_allow_html=True)
+    
+    total_kcal = 0
+    for key in ["petit_dej", "dejeuner", "collation", "diner"]:
+        meal = menu[key]
+        total_kcal += meal["kcal"]
+        st.markdown(f"""
+        <div class="meal-item" style="border-left-color: #ec4899;">
+            <div class="meal-item-title">🍽️ {meal['nom']}</div>
+            <div class="meal-item-food">{meal['plat']}</div>
+            <span class="meal-item-kcal">{meal['kcal']} kcal</span>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    st.markdown("</div>", unsafe_allow_html=True)
+    
+    # Total journée
+    st.markdown(f"""
+    <div style="background: linear-gradient(135deg, #be185d 0%, #ec4899 100%);
+                color: white; padding: 1.5rem; border-radius: 16px; text-align: center; margin-top: 1rem;">
+        <h3 style="margin: 0;">📊 TOTAL JOURNÉE</h3>
+        <p style="font-size: 2.5rem; margin: 0.5rem 0; font-weight: 700;">{total_kcal} kcal</p>
+        <p style="margin: 0; opacity: 0.9;">Objectif: ~1300-1400 kcal</p>
     </div>
     """, unsafe_allow_html=True)
+    
+    # Conseils
+    st.markdown("### 💡 Conseils pour Sonia")
+    st.markdown("""
+    - ✅ **Boire 2L d'eau** par jour minimum
+    - ✅ **Pas de grignotage** entre les repas
+    - ✅ **Manger lentement** (20 min minimum)
+    - ✅ **Légumes à volonté** (sauf féculents)
+    - ❌ **Éviter**: sucre, alcool, pain blanc, fritures
+    """)
+    
+    # Vue semaine complète
+    with st.expander("📅 Voir toute la semaine"):
+        for day_idx in range(7):
+            menu = MENU_SONIA[day_idx]
+            total = sum(menu[k]["kcal"] for k in ["petit_dej", "dejeuner", "collation", "diner"])
+            st.markdown(f"**{JOURS[day_idx]}** - {total} kcal")
+            for key in ["petit_dej", "dejeuner", "collation", "diner"]:
+                st.caption(f"  • {menu[key]['nom']}: {menu[key]['plat']}")
+            st.markdown("---")
 
 def render_measurements(user_key, default_weight):
     st.markdown("### 📏 Suivi")
@@ -915,7 +721,7 @@ def render_progress(user_key, target, start):
 # ==================== MAIN ====================
 st.markdown('<div class="main-header">💪 FitCouple</div>', unsafe_allow_html=True)
 
-tab1, tab2, tab3, tab4, tab5 = st.tabs(["🏋️ LUCA", "🧘 SONIA", "🥗 NUTRITION LUCA", "🥗 NUTRITION SONIA", "📅 PLANNING"])
+tab1, tab2, tab3, tab4 = st.tabs(["🏋️ LUCA", "🧘 SONIA", "🍽️ REPAS LUCA", "🍽️ REPAS SONIA"])
 
 with tab1:
     st.markdown("""<div class="profile-card">
@@ -956,13 +762,10 @@ with tab2:
         render_progress("sonia", 65, 78)
 
 with tab3:
-    render_nutrition_luca()
+    render_meal_calendar_luca()
 
 with tab4:
-    render_nutrition_sonia()
-
-with tab5:
-    render_meal_plan()
+    render_meal_calendar_sonia()
 
 st.markdown("---")
-st.caption("💪 FitCouple v4.1")
+st.caption("💪 FitCouple v4.2 - Planning repas optimisé")
