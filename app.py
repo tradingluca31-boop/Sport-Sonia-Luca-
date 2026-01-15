@@ -46,23 +46,29 @@ st.markdown("""
 .recipe-card {
     background: white; border-radius: 20px; overflow: hidden;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin: 1rem 0;
+    transition: transform 0.2s;
 }
+.recipe-card:hover { transform: translateY(-5px); }
 .recipe-img {
-    width: 100%; height: 200px; object-fit: cover;
+    width: 100%; height: 180px; object-fit: cover;
 }
 .recipe-content {
-    padding: 1.2rem;
+    padding: 1rem;
 }
+.recipe-video-btn {
+    display: inline-block; background: #ef4444; color: white !important;
+    padding: 0.5rem 1rem; border-radius: 8px; text-decoration: none;
+    font-weight: 600; font-size: 0.85rem; margin-top: 0.5rem;
+}
+.recipe-video-btn:hover { background: #dc2626; }
 
 .macro-badge {
-    display: inline-block; padding: 0.4rem 0.8rem;
-    border-radius: 20px; font-size: 0.8rem; font-weight: 600;
-    margin: 0.2rem;
+    display: inline-block; padding: 0.3rem 0.6rem;
+    border-radius: 20px; font-size: 0.75rem; font-weight: 600;
+    margin: 0.1rem;
 }
 .macro-cal { background: #fef3c7; color: #d97706; }
 .macro-prot { background: #dbeafe; color: #2563eb; }
-.macro-carb { background: #d1fae5; color: #059669; }
-.macro-fat { background: #fce7f3; color: #db2777; }
 
 .day-card {
     padding: 1rem; border-radius: 12px; text-align: center;
@@ -80,12 +86,6 @@ st.markdown("""
     background: linear-gradient(135deg, #f97316 0%, #ef4444 100%);
     color: white; padding: 1.2rem; border-radius: 16px;
     margin: 1.5rem 0; text-align: center;
-}
-
-.btn-video {
-    display: inline-block; background: #ef4444; color: white;
-    padding: 0.5rem 1rem; border-radius: 8px; text-decoration: none;
-    font-weight: 500; font-size: 0.85rem;
 }
 
 #MainMenu {visibility: hidden;}
@@ -110,143 +110,158 @@ if 'weight_luca' not in st.session_state:
 if 'weight_sonia' not in st.session_state:
     st.session_state.weight_sonia = []
 
-# ==================== EXERCICES AVEC VIDEOS ====================
+# ==================== EXERCICES ====================
 EXERCICES = {
-    # PUSH
     "Pompes classiques": {"video": "IODxDxX7oi4", "muscle": "Pectoraux", "desc": "Le basique pour des pecs en béton"},
     "Pompes inclinées": {"video": "4dF1DOWzf20", "muscle": "Haut des pecs", "desc": "Cible le haut de la poitrine"},
-    "Pompes serrées": {"video": "J0DnG1_S92I", "muscle": "Triceps", "desc": "Focus triceps et intérieur pecs"},
-    "Pike push-ups": {"video": "sposDXWEB0A", "muscle": "Épaules", "desc": "Excellent pour les épaules sans matériel"},
-    "Dips sur chaise": {"video": "0326dy_-CzM", "muscle": "Triceps", "desc": "Triceps de fou avec une simple chaise"},
-    "Développé haltères": {"video": "qEwKCR5JCog", "muscle": "Épaules", "desc": "Masse et force pour les épaules"},
-    "Élévations latérales": {"video": "3VcKaXpzqRo", "muscle": "Épaules", "desc": "Pour des épaules larges et rondes"},
-    "Extension triceps": {"video": "_gsUck-7M74", "muscle": "Triceps", "desc": "Isolation parfaite des triceps"},
-    
-    # PULL
-    "Rowing haltère": {"video": "roCP6wCXPqo", "muscle": "Dos", "desc": "Dos épais et large"},
+    "Pompes serrées": {"video": "J0DnG1_S92I", "muscle": "Triceps", "desc": "Focus triceps"},
+    "Pike push-ups": {"video": "sposDXWEB0A", "muscle": "Épaules", "desc": "Excellent pour les épaules"},
+    "Dips sur chaise": {"video": "0326dy_-CzM", "muscle": "Triceps", "desc": "Triceps avec une chaise"},
+    "Développé haltères": {"video": "qEwKCR5JCog", "muscle": "Épaules", "desc": "Masse pour les épaules"},
+    "Élévations latérales": {"video": "3VcKaXpzqRo", "muscle": "Épaules", "desc": "Épaules larges"},
+    "Extension triceps": {"video": "_gsUck-7M74", "muscle": "Triceps", "desc": "Isolation triceps"},
+    "Rowing haltère": {"video": "roCP6wCXPqo", "muscle": "Dos", "desc": "Dos épais"},
     "Superman": {"video": "z6PJMT2y8GQ", "muscle": "Lombaires", "desc": "Renforce le bas du dos"},
-    "Oiseau": {"video": "EA7u4Q_8HQ0", "muscle": "Arrière épaule", "desc": "Définition arrière d'épaule"},
-    "Curl biceps": {"video": "ykJmrZ5v0Oo", "muscle": "Biceps", "desc": "Des bras plus gros"},
-    "Curl marteau": {"video": "zC3nLlEvin4", "muscle": "Biceps/Avant-bras", "desc": "Biceps + avant-bras"},
-    
-    # LEGS
-    "Squats": {"video": "ultWZbUMPL8", "muscle": "Quadriceps", "desc": "Le roi des exercices jambes"},
-    "Squats sumo": {"video": "9ZuXKqRbT9k", "muscle": "Adducteurs/Fessiers", "desc": "Focus intérieur cuisses et fessiers"},
-    "Fentes": {"video": "QOVaHwm-Q6U", "muscle": "Quadriceps/Fessiers", "desc": "Jambes et fessiers sculptés"},
-    "Hip thrust": {"video": "SEdqd1n0cvg", "muscle": "Fessiers", "desc": "LE meilleur exo fessiers"},
-    "Glute bridge": {"video": "OUgsJ8-Vi0E", "muscle": "Fessiers", "desc": "Activation fessiers parfaite"},
-    "Donkey kicks": {"video": "SJ1Xuz9D-ZQ", "muscle": "Fessiers", "desc": "Galbe les fessiers"},
-    "Fire hydrants": {"video": "La3xrTxLXSE", "muscle": "Fessiers/Abducteurs", "desc": "Fessiers latéraux"},
-    
-    # CARDIO
-    "Jumping jacks": {"video": "c4DAnQ6DtF8", "muscle": "Cardio", "desc": "Échauffement et cardio"},
-    "Burpees": {"video": "TU8QYVW0gDU", "muscle": "Full body", "desc": "Le brûleur de calories ultime"},
+    "Oiseau": {"video": "EA7u4Q_8HQ0", "muscle": "Arrière épaule", "desc": "Arrière d'épaule"},
+    "Curl biceps": {"video": "ykJmrZ5v0Oo", "muscle": "Biceps", "desc": "Gros biceps"},
+    "Curl marteau": {"video": "zC3nLlEvin4", "muscle": "Biceps", "desc": "Biceps + avant-bras"},
+    "Squats": {"video": "ultWZbUMPL8", "muscle": "Quadriceps", "desc": "Le roi des jambes"},
+    "Squats sumo": {"video": "9ZuXKqRbT9k", "muscle": "Adducteurs", "desc": "Intérieur cuisses"},
+    "Fentes": {"video": "QOVaHwm-Q6U", "muscle": "Quadriceps/Fessiers", "desc": "Jambes sculptées"},
+    "Hip thrust": {"video": "SEdqd1n0cvg", "muscle": "Fessiers", "desc": "Meilleur exo fessiers"},
+    "Glute bridge": {"video": "OUgsJ8-Vi0E", "muscle": "Fessiers", "desc": "Activation fessiers"},
+    "Donkey kicks": {"video": "SJ1Xuz9D-ZQ", "muscle": "Fessiers", "desc": "Galbe fessiers"},
+    "Fire hydrants": {"video": "La3xrTxLXSE", "muscle": "Fessiers", "desc": "Fessiers latéraux"},
+    "Jumping jacks": {"video": "c4DAnQ6DtF8", "muscle": "Cardio", "desc": "Cardio"},
+    "Burpees": {"video": "TU8QYVW0gDU", "muscle": "Full body", "desc": "Brûleur de calories"},
     "High knees": {"video": "D0bLJnSBNI8", "muscle": "Cardio", "desc": "Cardio intense"},
-    "Squat jumps": {"video": "A-cFYWvaHr0", "muscle": "Jambes/Cardio", "desc": "Explosivité et cardio"},
+    "Squat jumps": {"video": "A-cFYWvaHr0", "muscle": "Jambes/Cardio", "desc": "Explosivité"},
     "Mountain climbers": {"video": "nmwgirgXLYM", "muscle": "Core/Cardio", "desc": "Abdos + cardio"},
-    
-    # ABDOS
-    "Gainage (Planche)": {"video": "ASdvN_XEl_c", "muscle": "Core", "desc": "La base d'un core solide"},
-    "Gainage latéral": {"video": "K2VljzCC16g", "muscle": "Obliques", "desc": "Obliques en acier"},
+    "Gainage (Planche)": {"video": "ASdvN_XEl_c", "muscle": "Core", "desc": "Core solide"},
+    "Gainage latéral": {"video": "K2VljzCC16g", "muscle": "Obliques", "desc": "Obliques"},
     "Crunch": {"video": "Xyd_fa5zoEU", "muscle": "Abdos", "desc": "Le classique"},
-    "Russian twist": {"video": "wkD8rjkodUI", "muscle": "Obliques", "desc": "Taille fine et obliques"},
-    "Scissor kicks": {"video": "WoNCIBVLbgY", "muscle": "Bas des abdos", "desc": "Cible le bas du ventre"},
-    "V-ups": {"video": "iP2fjvG0g3w", "muscle": "Abdos complet", "desc": "Abdos intense"},
+    "Russian twist": {"video": "wkD8rjkodUI", "muscle": "Obliques", "desc": "Taille fine"},
+    "Scissor kicks": {"video": "WoNCIBVLbgY", "muscle": "Bas abdos", "desc": "Bas du ventre"},
+    "V-ups": {"video": "iP2fjvG0g3w", "muscle": "Abdos", "desc": "Abdos intense"},
     "Bicycle crunch": {"video": "9FGilxCbdz8", "muscle": "Obliques", "desc": "Abdos + obliques"},
 }
 
-# ==================== RECETTES AVEC PHOTOS ====================
+# ==================== RECETTES HEALTHY & GOURMANDES ====================
 RECETTES = {
     "petit_dejeuner": [
         {
-            "nom": "Porridge Protéiné",
-            "img": "https://images.unsplash.com/photo-1517673400267-0251440c45dc?w=400",
-            "kcal": 380, "prot": 28, "gluc": 45, "lip": 10,
-            "ingredients": ["80g flocons d'avoine", "250ml lait", "30g whey", "1 banane", "Miel"],
-            "instructions": "Cuire les flocons dans le lait. Hors du feu, ajouter la whey. Garnir de banane et miel."
+            "nom": "🥞 Pancakes Protéinés Banane",
+            "img": "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400",
+            "video": "https://www.youtube.com/watch?v=N8iUYICFkvI",
+            "kcal": 350, "prot": 25,
+            "ingredients": ["1 banane mûre", "2 oeufs", "30g flocons d'avoine", "30g whey vanille", "1 c.c levure"],
+            "prep": "Mixer tout. Cuire à la poêle comme des pancakes. Servir avec fruits frais.",
+            "why": "Délicieux, rassasiant et plein de protéines !"
         },
         {
-            "nom": "Omelette Complète",
+            "nom": "🥑 Toast Avocat Oeuf Poché",
             "img": "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=400",
-            "kcal": 320, "prot": 25, "gluc": 8, "lip": 22,
-            "ingredients": ["3 oeufs", "Poivrons", "Champignons", "Fromage"],
-            "instructions": "Battre les oeufs. Faire revenir les légumes. Verser les oeufs, ajouter fromage."
+            "video": "https://www.youtube.com/watch?v=66btvAWmp7g",
+            "kcal": 380, "prot": 18,
+            "ingredients": ["1 tranche pain complet", "1/2 avocat", "1 oeuf", "Citron", "Piment (option)"],
+            "prep": "Toaster le pain. Écraser l'avocat avec citron. Pocher l'oeuf. Assembler.",
+            "why": "Bon gras + protéines = énergie longue durée"
         },
         {
-            "nom": "Smoothie Bowl",
-            "img": "https://images.unsplash.com/photo-1590301157890-4810ed352733?w=400",
-            "kcal": 350, "prot": 22, "gluc": 50, "lip": 8,
-            "ingredients": ["200g fruits rouges", "1 banane", "200ml lait", "30g whey", "Granola"],
-            "instructions": "Mixer fruits, banane, lait et whey. Verser dans un bol. Garnir de granola."
+            "nom": "🫐 Overnight Oats Fruits Rouges",
+            "img": "https://images.unsplash.com/photo-1517673400267-0251440c45dc?w=400",
+            "video": "https://www.youtube.com/watch?v=O9Hf_8WvSKE",
+            "kcal": 320, "prot": 22,
+            "ingredients": ["50g flocons d'avoine", "150ml lait", "100g yaourt grec", "Fruits rouges", "Miel"],
+            "prep": "Mélanger avoine, lait, yaourt. Réfrigérer une nuit. Ajouter fruits et miel.",
+            "why": "Zéro effort le matin, super healthy"
         },
     ],
     "dejeuner": [
         {
-            "nom": "Bowl Poulet Quinoa",
+            "nom": "🍛 Buddha Bowl Poulet",
             "img": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400",
-            "kcal": 520, "prot": 45, "gluc": 42, "lip": 18,
-            "ingredients": ["200g poulet", "100g quinoa", "Légumes", "Avocat", "Sauce soja"],
-            "instructions": "Griller le poulet. Cuire le quinoa. Assembler avec légumes et avocat."
+            "video": "https://www.youtube.com/watch?v=Yz-x10gXRCI",
+            "kcal": 480, "prot": 42,
+            "ingredients": ["150g poulet", "100g quinoa", "Avocat", "Pois chiches", "Légumes", "Sauce tahini"],
+            "prep": "Cuire quinoa et poulet. Disposer tous les ingrédients en bowl. Sauce tahini.",
+            "why": "Complet, coloré, délicieux et ultra rassasiant"
         },
         {
-            "nom": "Salade Protéinée",
-            "img": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400",
-            "kcal": 380, "prot": 32, "gluc": 15, "lip": 22,
-            "ingredients": ["150g thon", "2 oeufs durs", "Salade verte", "Tomates", "Olives"],
-            "instructions": "Cuire les oeufs. Assembler tous les ingrédients. Assaisonner."
-        },
-        {
-            "nom": "Wrap Poulet Avocat",
+            "nom": "🌮 Wrap Poulet Caesar Light",
             "img": "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=400",
-            "kcal": 450, "prot": 35, "gluc": 38, "lip": 18,
-            "ingredients": ["1 tortilla", "150g poulet", "Avocat", "Salade", "Sauce yaourt"],
-            "instructions": "Garnir la tortilla de tous les ingrédients. Rouler serré."
+            "video": "https://www.youtube.com/watch?v=5GqbKMxb7x0",
+            "kcal": 420, "prot": 38,
+            "ingredients": ["1 tortilla complète", "150g poulet", "Salade romaine", "Parmesan", "Sauce yaourt-citron"],
+            "prep": "Griller le poulet. Préparer sauce yaourt+citron+ail. Garnir et rouler.",
+            "why": "Le goût d'un Caesar sans les calories"
+        },
+        {
+            "nom": "🍝 Poke Bowl Saumon",
+            "img": "https://images.unsplash.com/photo-1546069901-d5bfd2cbfb1f?w=400",
+            "video": "https://www.youtube.com/watch?v=c_5LP3k9cHs",
+            "kcal": 450, "prot": 35,
+            "ingredients": ["150g saumon frais", "100g riz", "Avocat", "Edamame", "Mangue", "Sauce soja"],
+            "prep": "Cuire le riz. Couper saumon en cubes. Assembler avec tous les toppings.",
+            "why": "Oméga-3 + fraîcheur = combo gagnant"
         },
     ],
     "diner": [
         {
-            "nom": "Saumon Grillé Légumes",
+            "nom": "🍛 Curry Poulet Léger",
+            "img": "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400",
+            "video": "https://www.youtube.com/watch?v=iFTlWbo8ZQk",
+            "kcal": 380, "prot": 40,
+            "ingredients": ["200g poulet", "Lait de coco light", "Curry", "Poivrons", "Oignon", "Riz basmati"],
+            "prep": "Faire revenir poulet et légumes. Ajouter curry et lait coco. Mijoter. Servir avec riz.",
+            "why": "Saveurs intenses, peu de calories"
+        },
+        {
+            "nom": "🐟 Papillote Saumon Citron",
             "img": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400",
-            "kcal": 420, "prot": 38, "gluc": 20, "lip": 22,
-            "ingredients": ["180g saumon", "200g légumes verts", "Citron", "Herbes"],
-            "instructions": "Griller le saumon avec citron. Cuire les légumes à la vapeur."
+            "video": "https://www.youtube.com/watch?v=4TfwtSqXhHo",
+            "kcal": 350, "prot": 38,
+            "ingredients": ["180g saumon", "Citron", "Aneth", "Courgettes", "Tomates cerises"],
+            "prep": "Mettre saumon et légumes en papillote. Citron et aneth. Four 20min à 180°C.",
+            "why": "Cuisson sans gras, maximum de goût"
         },
         {
-            "nom": "Poulet Patate Douce",
-            "img": "https://images.unsplash.com/photo-1432139555190-58524dae6a55?w=400",
-            "kcal": 480, "prot": 42, "gluc": 45, "lip": 12,
-            "ingredients": ["200g poulet", "200g patate douce", "Brocoli", "Épices"],
-            "instructions": "Griller le poulet. Cuire patate douce au four. Vapeur pour brocoli."
-        },
-        {
-            "nom": "Cabillaud Riz",
-            "img": "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=400",
-            "kcal": 350, "prot": 35, "gluc": 35, "lip": 8,
-            "ingredients": ["180g cabillaud", "100g riz", "Haricots verts", "Citron"],
-            "instructions": "Cuire le riz. Poêler le cabillaud. Servir avec haricots."
+            "nom": "🍜 Wok Crevettes Légumes",
+            "img": "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=400",
+            "video": "https://www.youtube.com/watch?v=MeD8bDgYy2s",
+            "kcal": 320, "prot": 32,
+            "ingredients": ["200g crevettes", "Brocoli", "Poivrons", "Champignons", "Sauce soja", "Gingembre"],
+            "prep": "Sauter les crevettes. Ajouter légumes. Assaisonner sauce soja et gingembre.",
+            "why": "Rapide, léger et plein de saveurs asiatiques"
         },
     ],
     "collation": [
         {
-            "nom": "Shake Protéiné",
+            "nom": "🥤 Smoothie Protéiné Chocolat",
             "img": "https://images.unsplash.com/photo-1553530666-ba11a90a0868?w=400",
-            "kcal": 250, "prot": 35, "gluc": 20, "lip": 5,
-            "ingredients": ["40g whey", "300ml lait", "1 banane"],
-            "instructions": "Mixer tous les ingrédients."
+            "video": "https://www.youtube.com/watch?v=eMxY0xLrHd0",
+            "kcal": 280, "prot": 30,
+            "ingredients": ["30g whey chocolat", "250ml lait d'amande", "1 banane", "1 c.s beurre cacahuète"],
+            "prep": "Mixer tous les ingrédients jusqu'à consistance lisse.",
+            "why": "Goût dessert, macros parfaites"
         },
         {
-            "nom": "Yaourt Grec Fruits",
-            "img": "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400",
-            "kcal": 180, "prot": 15, "gluc": 20, "lip": 5,
-            "ingredients": ["200g yaourt grec 0%", "Fruits frais", "Miel"],
-            "instructions": "Mélanger le tout."
-        },
-        {
-            "nom": "Energy Balls",
+            "nom": "🍫 Energy Balls Cacao",
             "img": "https://images.unsplash.com/photo-1604329760661-e71dc83f8f26?w=400",
-            "kcal": 200, "prot": 8, "gluc": 25, "lip": 10,
-            "ingredients": ["Dattes", "Amandes", "Cacao", "Flocons d'avoine"],
-            "instructions": "Mixer et former des boules. Réfrigérer."
+            "video": "https://www.youtube.com/watch?v=jpKjz8vfKb8",
+            "kcal": 180, "prot": 8,
+            "ingredients": ["100g dattes", "50g amandes", "2 c.s cacao", "1 c.s miel"],
+            "prep": "Mixer dattes et amandes. Ajouter cacao et miel. Former des boules. Réfrigérer.",
+            "why": "Sucré naturellement, énergie immédiate"
+        },
+        {
+            "nom": "🍌 Yaourt Grec Gourmand",
+            "img": "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400",
+            "video": "https://www.youtube.com/watch?v=_2eqlzCo3kU",
+            "kcal": 200, "prot": 18,
+            "ingredients": ["200g yaourt grec 0%", "Granola", "Miel", "Fruits frais"],
+            "prep": "Mettre yaourt dans un bol. Ajouter granola, fruits et filet de miel.",
+            "why": "Protéiné, gourmand et rassasiant"
         },
     ]
 }
@@ -283,10 +298,7 @@ PROGRAM_LUCA = {
             ("Burpees", "3 x 10"),
         ]},
     3: {"nom": "REPOS", "emoji": "💤", "type": "Récupération", "duree": 30, "abdos": False,
-        "exercices": [
-            ("Marche/Vélo léger", "20-30 min"),
-            ("Étirements", "10 min"),
-        ]},
+        "exercices": [("Marche/Vélo léger", "20-30 min"), ("Étirements", "10 min")]},
     4: {"nom": "FULL BODY", "emoji": "🔥", "type": "Complet", "duree": 55, "abdos": True,
         "exercices": [
             ("Squats", "4 x 12"),
@@ -297,11 +309,8 @@ PROGRAM_LUCA = {
             ("Curl biceps", "3 x 12"),
         ]},
     5: {"nom": "CARDIO", "emoji": "🏃", "type": "Endurance", "duree": 40, "abdos": False,
-        "exercices": [
-            ("Vélo ou Course", "30-40 min"),
-        ]},
-    6: {"nom": "REPOS", "emoji": "💤", "type": "Repos complet", "duree": 0, "abdos": False,
-        "exercices": []},
+        "exercices": [("Vélo ou Course", "30-40 min")]},
+    6: {"nom": "REPOS", "emoji": "💤", "type": "Repos complet", "duree": 0, "abdos": False, "exercices": []},
 }
 
 PROGRAM_SONIA = {
@@ -331,10 +340,7 @@ PROGRAM_SONIA = {
             ("Dips sur chaise", "3 x 10"),
         ]},
     3: {"nom": "CARDIO", "emoji": "🚶", "type": "Modéré", "duree": 40, "abdos": False,
-        "exercices": [
-            ("Marche rapide/Vélo", "35 min"),
-            ("Étirements", "10 min"),
-        ]},
+        "exercices": [("Marche rapide/Vélo", "35 min"), ("Étirements", "10 min")]},
     4: {"nom": "CIRCUIT", "emoji": "🔄", "type": "Full Body", "duree": 40, "abdos": True,
         "exercices": [
             ("Squats", "3 x 15"),
@@ -351,8 +357,7 @@ PROGRAM_SONIA = {
             ("Fire hydrants", "4 x 20/côté"),
             ("Glute bridge", "50 reps"),
         ]},
-    6: {"nom": "REPOS", "emoji": "🧘", "type": "Yoga/Étirements", "duree": 30, "abdos": False,
-        "exercices": []},
+    6: {"nom": "REPOS", "emoji": "🧘", "type": "Yoga/Étirements", "duree": 30, "abdos": False, "exercices": []},
 }
 
 CIRCUIT_ABDOS = [
@@ -394,28 +399,32 @@ def render_calendar(program):
     
     return today_idx
 
-def render_exercise_card(nom, sets, idx):
+def render_exercise_card(nom, sets):
     ex = EXERCICES.get(nom, {})
     video_id = ex.get('video', '')
     muscle = ex.get('muscle', '')
     desc = ex.get('desc', '')
     
-    thumb = f"https://img.youtube.com/vi/{video_id}/mqdefault.jpg" if video_id else ""
-    link = f"https://youtube.com/watch?v={video_id}" if video_id else "#"
+    if not video_id:
+        st.markdown(f"**{nom}** - {sets}")
+        return
+    
+    thumb = f"https://img.youtube.com/vi/{video_id}/mqdefault.jpg"
+    link = f"https://youtube.com/watch?v={video_id}"
     
     st.markdown(f"""
     <div class="exercise-card">
         <div style="display: flex; gap: 1rem; align-items: center;">
-            <div style="flex: 0 0 160px;">
+            <div style="flex: 0 0 140px;">
                 <a href="{link}" target="_blank">
                     <img src="{thumb}" class="video-thumb" alt="{nom}">
                 </a>
             </div>
             <div style="flex: 1;">
                 <h4 style="margin: 0; color: #1e1e2e;">{nom}</h4>
-                <p style="margin: 0.3rem 0; color: #6366f1; font-weight: 600;">{sets}</p>
-                <p style="margin: 0; font-size: 0.85rem; color: #64748b;">{desc}</p>
-                <span style="background: #f1f5f9; padding: 0.2rem 0.6rem; border-radius: 20px; font-size: 0.75rem;">{muscle}</span>
+                <p style="margin: 0.2rem 0; color: #6366f1; font-weight: 600;">{sets}</p>
+                <p style="margin: 0; font-size: 0.8rem; color: #64748b;">{desc}</p>
+                <span style="background: #f1f5f9; padding: 0.2rem 0.5rem; border-radius: 20px; font-size: 0.7rem;">{muscle}</span>
             </div>
         </div>
     </div>
@@ -433,8 +442,8 @@ def render_workout(program, day_idx, user_key):
     
     st.markdown("---")
     
-    for idx, (nom, sets) in enumerate(workout.get('exercices', [])):
-        render_exercise_card(nom, sets, idx)
+    for nom, sets in workout.get('exercices', []):
+        render_exercise_card(nom, sets)
     
     if workout.get('abdos'):
         st.markdown("""<div class="abdos-banner">
@@ -443,7 +452,7 @@ def render_workout(program, day_idx, user_key):
         </div>""", unsafe_allow_html=True)
         
         for nom, reps in CIRCUIT_ABDOS:
-            render_exercise_card(nom, reps, 0)
+            render_exercise_card(nom, reps)
     
     st.markdown("---")
     
@@ -453,44 +462,45 @@ def render_workout(program, day_idx, user_key):
     with col2:
         if st.button("✅ Terminé !", key=f"btn_{user_key}", type="primary", use_container_width=True):
             st.balloons()
-            st.success("🎉 Bravo ! Séance validée !")
+            st.success("🎉 Bravo !")
 
 def render_recipe_card(recipe):
     st.markdown(f"""
     <div class="recipe-card">
         <img src="{recipe['img']}" class="recipe-img" alt="{recipe['nom']}">
         <div class="recipe-content">
-            <h3 style="margin: 0 0 0.5rem 0;">{recipe['nom']}</h3>
-            <div>
+            <h4 style="margin: 0 0 0.3rem 0;">{recipe['nom']}</h4>
+            <div style="margin-bottom: 0.5rem;">
                 <span class="macro-badge macro-cal">{recipe['kcal']} kcal</span>
                 <span class="macro-badge macro-prot">{recipe['prot']}g prot</span>
-                <span class="macro-badge macro-carb">{recipe['gluc']}g gluc</span>
-                <span class="macro-badge macro-fat">{recipe['lip']}g lip</span>
             </div>
+            <p style="font-size: 0.8rem; color: #64748b; margin: 0;">{recipe['why']}</p>
+            <a href="{recipe['video']}" target="_blank" class="recipe-video-btn">▶️ Voir la recette</a>
         </div>
     </div>
     """, unsafe_allow_html=True)
     
-    with st.expander("📝 Voir la recette"):
+    with st.expander("📝 Ingrédients & Préparation"):
         st.markdown("**Ingrédients:**")
         for ing in recipe['ingredients']:
             st.markdown(f"• {ing}")
-        st.markdown(f"**Préparation:** {recipe['instructions']}")
+        st.markdown(f"\n**Préparation:** {recipe['prep']}")
 
 def render_nutrition():
-    st.markdown("## 🍽️ Recettes")
+    st.markdown("## 🍽️ Recettes Healthy & Gourmandes")
+    st.markdown("*Des plats délicieux qui font perdre du poids*")
     
     category = st.selectbox(
-        "Type de repas",
-        ["Petit-déjeuner", "Déjeuner", "Dîner", "Collation"],
+        "Quel repas ?",
+        ["🍳 Petit-déjeuner", "🍝 Déjeuner", "🌙 Dîner", "🍪 Collation"],
         key="cat_select"
     )
     
     cat_map = {
-        "Petit-déjeuner": "petit_dejeuner",
-        "Déjeuner": "dejeuner",
-        "Dîner": "diner",
-        "Collation": "collation"
+        "🍳 Petit-déjeuner": "petit_dejeuner",
+        "🍝 Déjeuner": "dejeuner",
+        "🌙 Dîner": "diner",
+        "🍪 Collation": "collation"
     }
     
     recipes = RECETTES.get(cat_map[category], [])
@@ -541,8 +551,7 @@ def render_progress(user_key, target, start):
                                 line=dict(color='#6366f1', width=3),
                                 marker=dict(size=10)))
         fig.add_hline(y=target, line_dash="dash", line_color="#22c55e")
-        fig.update_layout(height=300, title="Évolution du poids",
-                         plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)')
+        fig.update_layout(height=300, title="Évolution du poids")
         st.plotly_chart(fig, use_container_width=True)
     else:
         col3.metric("Actuel", "-")
@@ -595,4 +604,4 @@ with tab3:
     render_nutrition()
 
 st.markdown("---")
-st.caption("💪 FitCouple v3.0 | Entraînement Maison")
+st.caption("💪 FitCouple v3.0")
